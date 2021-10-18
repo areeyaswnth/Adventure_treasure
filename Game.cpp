@@ -59,7 +59,6 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         monster[i].Draw(window);
 
     }
-  //  player.bulletmove();
     player.Update(time);
     player.Draw(window,time);
 }
