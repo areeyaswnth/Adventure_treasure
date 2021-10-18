@@ -49,7 +49,8 @@ void Monsters::Draw(sf::RenderWindow& window)
 	}
 	else
 	{
-		state = false;
-		//body.setPosition(randrangemonster(55, 1025), randrangemonster(200, 680));
+	//	state = false;
+		HP = 100;
+		body.setPosition(randrangemonster(55, 1025), randrangemonster(200, 680));
 	}
 }

@@ -16,6 +16,7 @@ Player::Player()
 	numbullet = 0;
 	dir_bullet = 4;
 	HP = max_HP;
+	score = 0;
 }
 
 Player::~Player()

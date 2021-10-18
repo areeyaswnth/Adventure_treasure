@@ -29,6 +29,8 @@ Chest::Chest()
 	monster.speed = randrange(3, 5) * 0.01;
 	monster.state = false;
 	randchest();
+	//
+	open = false;
 }
 
 Chest::~Chest()
@@ -38,21 +40,11 @@ Chest::~Chest()
 void Chest::Update(sf::FloatRect p1)
 {
 
-	if (box.getGlobalBounds().intersects(p1)&& sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+	if (box.getGlobalBounds().intersects(p1)&& sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)&&coin.state==false&&open==false) {
 		box.setTextureRect(sf::IntRect(box_xsize, 0, box_xsize, box_ysize));
 		open = true;
 		coin.state = true;		
 	}
-	 if (coin.shape.getGlobalBounds().intersects(p1) && open == true && sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-		box.setTextureRect(sf::IntRect(0, 0, box_xsize, box_ysize));
-		open = false;
-		coin.state = false;	
-		monster.state = false;
-		randchest();
-
-
-	}
-
 }
 
 void Chest::Draw(sf::RenderWindow& window,float time)
@@ -66,7 +58,7 @@ void Chest::Draw(sf::RenderWindow& window,float time)
 			window.draw(monster.shape);
 			monster_move();
 		}
-		else if(monster.HP<=0)
+		if(monster.HP<=0)
 		{
 			monster.state = false;
 		}
@@ -89,6 +81,7 @@ void Chest::randchest()
 	monster.shape.setPosition(box.getPosition().x+60, box.getPosition().y);
 	if (random ==1) {
 		monster.state =true ;
+		monster.HP = 50;
 	}
 
 }

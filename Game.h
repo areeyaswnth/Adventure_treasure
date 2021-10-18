@@ -12,6 +12,7 @@ public:
 	~Game();
 	void collision1(int i);
 	void collision2(int i);
+	void collision3(int i);
 	void gamedraw(sf::RenderWindow& window,float time);
 private:
 	sf::Clock clock;

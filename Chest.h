@@ -5,7 +5,6 @@ class Chest {
 public:
 	Chest();
 	~Chest();
-
 	void Update(sf::FloatRect p1);
 	void Draw(sf::RenderWindow& window,float time);
 	void randchest();
@@ -19,22 +18,20 @@ public:
 	struct MyStruct2
 	{
 		float speed;
-		int HP=50;
+		int HP;
 		bool state;
-		int max=3;
 		sf::Texture texture;
 		sf::RectangleShape shape;
 
 	}monster;	
-	bool open;
-private:
-	sf::Texture chest_texture;
-	sf::RectangleShape box;
-	bool faceRight;
+	bool open;	
+	sf::RectangleShape box;	
 	int box_xsize;
 	int box_ysize;
+private:
+	sf::Texture chest_texture;
+	bool faceRight;
 	int animationFrame;
-
 	int dir = 1;
 	int type_box;
 

@@ -26,6 +26,5 @@ private:
 	int dir_bullet;
 	int numbullet;
 	sf::Clock time;
-
 	float timebullet;
 };
