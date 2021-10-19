@@ -19,10 +19,11 @@ void Game::collision1(int i)
         player.HP-=5;
         std::cout <<"HP:"<<player.HP<<"\n";
    }
-    if (player.bullet.bullet_body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds()) && chest[i].monster.state&&player.bullet.state)
+    if (player.bullet.bullet_body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds()) && chest[i].monster.state&&player.bullet.state&&chest[i].open)
     {
         player.bullet.state = false;
         chest[i].monster.HP -= 10;
+        if (chest[i].monster.HP <= 0)player.score += 50;
     }
     if (player.body.getGlobalBounds().intersects(chest[i].coin.shape.getGlobalBounds()) && chest[i].open && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && chest[i].coin.state && !chest[i].monster.state) {
         chest[i].box.setTextureRect(sf::IntRect(0, 0, chest[i].box_xsize, chest[i].box_ysize));
@@ -30,7 +31,7 @@ void Game::collision1(int i)
         chest[i].coin.state = false;
         chest[i].monster.state = false;
         chest[i].randchest();
-        player.score += 10;
+        player.score += 100;
         std::cout << "SCORE:" << player.score << "\n";
     }
 }
@@ -43,11 +44,13 @@ void Game::collision2(int i)
     }
     if (player.body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&  counttime >= 800 && monster[i].state ) {
         player.HP-=10;
+        std::cout << "HP:" << player.HP << "\n";
     }
     if (player.bullet.bullet_body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds())  && player.bullet.state&&monster[i].state)
     {
         monster[i].HP -= 15;
         player.bullet.state = false;
+        if(monster[i].HP<=0)player.score += 50;
     }
 }
 
