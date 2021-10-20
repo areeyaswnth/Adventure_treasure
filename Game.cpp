@@ -6,8 +6,8 @@ Game::Game()
     HPsize_x = 500.0f;
     HPsize_y = 40.0f;
     HP.setPosition(50, 30);
-    baseHP.setPosition(48, 28);
-    baseHP.setSize(sf::Vector2f(HPsize_x + 4, HPsize_y + 4));
+    baseHP.setPosition(45, 25);
+    baseHP.setSize(sf::Vector2f(HPsize_x + 10, HPsize_y + 10));
     baseHP.setFillColor(sf::Color::White);
 }
 
