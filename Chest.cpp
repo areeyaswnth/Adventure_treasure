@@ -21,6 +21,7 @@ Chest::Chest()
 	coin.shape.setTexture(&coin.texture);
 	coin.state = false;
 	coin.shape.setSize(sf::Vector2f(55.20f, 62.4f));
+	coin.animation = 0;
 	//monster
 	monster.texture.loadFromFile("graphics/monster2.png");
 	monster.shape.setTextureRect(sf::IntRect(0, 0, box_xsize, box_ysize));
@@ -49,9 +50,16 @@ void Chest::Update(sf::FloatRect p1)
 
 void Chest::Draw(sf::RenderWindow& window,float time)
 {
+
+	timeC = clock.getElapsedTime().asMilliseconds();
+	//std::cout << timeC << "\n";
 		window.draw(box);
 		if (open&&coin.state) {
 			window.draw(coin.shape);
+			if (timeC >= 150) {
+				coin.animation++;
+				 clock.restart();
+			}
 		}
 		if (open&&monster.state&&coin.state&&monster.HP>0)
 		{
@@ -62,6 +70,8 @@ void Chest::Draw(sf::RenderWindow& window,float time)
 		{
 			monster.state = false;
 		}
+		if (coin.animation >= 4) coin.animation=0;
+		coin.shape.setTextureRect(sf::IntRect(box_xsize*coin.animation, 0, box_xsize, box_ysize));
 }
 void Chest::monster_move() {
 		if (dir == 1) monster.shape.move(monster.speed, 0);

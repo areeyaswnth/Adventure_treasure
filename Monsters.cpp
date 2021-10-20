@@ -17,8 +17,8 @@ Monsters::Monsters()
 	body.setPosition(randrangemonster(55, 1025), randrangemonster(200,680));
 	pos_x = body.getPosition().x;
 	pos_y = body.getPosition().y;
-	//speed = 0.05;
-	speed= randrangemonster(2, 8) * 0.01;
+	speed = 0.05;
+//	speed= randrangemonster(2, 8) * 0.01;
 	dir = randrangemonster(-1,1);
 }
 

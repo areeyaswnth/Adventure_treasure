@@ -14,6 +14,7 @@ public:
 		bool state;
 		sf::Texture texture;
 		sf::RectangleShape shape;
+		int animation;
 	}coin;	
 	struct MyStruct2
 	{
@@ -21,7 +22,8 @@ public:
 		int HP;
 		bool state;
 		sf::Texture texture;
-		sf::RectangleShape shape;
+		sf::RectangleShape shape;	
+		
 
 	}monster;	
 	bool open;	
@@ -29,6 +31,8 @@ public:
 	int box_xsize;
 	int box_ysize;
 private:
+	sf::Clock clock;
+	float timeC;
 	sf::Texture chest_texture;
 	bool faceRight;
 	int animationFrame;
