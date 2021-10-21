@@ -13,7 +13,6 @@ Player::Player()
 	body_ysize = player_texture.getSize().y / 4;
 	body.setTextureRect(sf::IntRect(0, 0,body_xsize,body_ysize));	
 	animationFrame=0;
-	numbullet = 0;
 	dir_bullet = 4;
 	HP = max_HP;
 	score = 0;
@@ -24,7 +23,7 @@ Player::~Player()
 }
 
 void Player::Update(float deltatime)
-{	//timebullet = time.getElapsedTime().asMilliseconds();
+{	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)&&deltatime>15 &&body.getPosition().x>0) {
 		body.setTextureRect(sf::IntRect(body_xsize*animationFrame, body_ysize * 2, body_xsize, body_ysize));
 		body.move(-2.f, 0.f);
@@ -51,28 +50,16 @@ void Player::Update(float deltatime)
 		animationFrame++;
 		dir_bullet = 4;
 	}
-	if (bullet.state==false && sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ) {
-		bullet.pos(body.getPosition().x, body.getPosition().y,dir_bullet);
-		//numbullet = numbullet % 5;	
-		//numbullet++;			
-		bullet.update(timebullet);
-		//bullet.state = true;
-
-	}
 	animationFrame++;
 	if (animationFrame >=3) {
 		animationFrame = 0;
 	}		
-//	if (timebullet > 2100)timebullet = time.restart().asSeconds();		
 	
 
 }
 
 void Player::Draw(sf::RenderWindow& window, float deltatime)
 {
-	if (bullet.state) {
-			bullet.Draw(window);
-		}
 	window.draw(body);
 }
 

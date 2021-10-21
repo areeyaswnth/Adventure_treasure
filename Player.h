@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include"Bullet.h"
 class Player {
 public:
 	Player();
@@ -11,8 +10,8 @@ public:
 	sf::FloatRect Collision();
 	sf::RectangleShape body;	
 	int HP;	
-	size_t score;	
-	Bullet bullet;
+	size_t score;		
+	int dir_bullet;
 private:
 	sf::Texture bullettexture;
 	sf::Texture player_texture;
@@ -23,8 +22,6 @@ private:
 	int body_ysize;
 	int animationFrame;
 	int max_HP=100;
-	int dir_bullet;
-	int numbullet;
-	sf::Clock time;
-	float timebullet;
+
+
 };

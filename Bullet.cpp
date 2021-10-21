@@ -16,21 +16,15 @@ Bullet::~Bullet()
 
 
 
-void Bullet::update(float deltatime)
+void Bullet::update()
 {	
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) ) {
-		state = true;	
-	}		
-
+		state = true;		
 
 }
 void Bullet::Draw(sf::RenderWindow& window)
 {	
-	if (state==true) {
 	window.draw(bullet_body);
 	bullet_move();
-	}		
-
 }
 
 void Bullet::pos(float pos_x, float pos_y,int Dir)

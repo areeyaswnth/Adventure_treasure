@@ -7,7 +7,7 @@ public:
 	Bullet();
 	~Bullet();
 	void Draw(sf::RenderWindow& window);
-	void update(float deltatime);
+	void update();
 	void pos(float pos_x, float pos_y,int Dir);
 	void bullet_move();	
 	bool state;	

@@ -8,6 +8,7 @@ Game::Game()
     baseHP.setPosition(45, 25);
     baseHP.setSize(sf::Vector2f(HPsize_x + 10, HPsize_y + 10));
     baseHP.setFillColor(sf::Color::White);
+    numbullet = 0;
 }
 
 Game::~Game()
@@ -19,20 +20,13 @@ void Game::collision1(int i)
 
     if (player.body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds())&&chest[i].monster.state&&counttime>=2000&&chest[i].open) {
         player.HP-=5;      
-        player.body.setFillColor(sf::Color(255, 0, 0, 100));
+      //  player.body.setFillColor(sf::Color(255, 0, 0, 100));
         clock.restart();
      //   std::cout <<"HP:"<<player.HP<<"\n";
    }    
     else
     {
         player.body.setFillColor(sf::Color(255, 255, 255, 255));
-    }
-    if (player.bullet.bullet_body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds()) && chest[i].monster.state&&player.bullet.state&&chest[i].open)
-    {
-        player.bullet.state = false;
-        chest[i].monster.HP -= 15;
-        if (chest[i].monster.HP <= 0)player.score += 50;
-  
     }
     if (player.body.getGlobalBounds().intersects(chest[i].coin.shape.getGlobalBounds()) && chest[i].open && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && chest[i].coin.state && !chest[i].monster.state) {
         chest[i].box.setTextureRect(sf::IntRect(0, 0, chest[i].box_xsize, chest[i].box_ysize));
@@ -59,12 +53,6 @@ void Game::collision2(int i)
     else
     {
         player.body.setFillColor(sf::Color(255, 255, 255, 255));
-    }
-    if (player.bullet.bullet_body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds())  && player.bullet.state&&monster[i].state)
-    {
-        monster[i].HP -= 15;
-        player.bullet.state = false;
-        if(monster[i].HP<=0)player.score += 50;
     }
 
 }
@@ -93,34 +81,85 @@ void Game::HPupdate()
     HP.setSize(sf::Vector2f(HPsize_x, HPsize_y));
 }
 
+void Game::pewbullet()
+{
+    timebullet = clockbullet.getElapsedTime().asMilliseconds();
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&timebullet>=300&&!bullet[numbullet].state) {
+        bullet[numbullet].state = true;
+        bullet[numbullet].pos(player.body.getPosition().x, player.body.getPosition().y,player.dir_bullet);
+        numbullet++;
+        numbullet = numbullet % 3;
+        clockbullet.restart();
+    }
+}
+
+
+void Game::collision3(int i, int j)
+{
+    if (bullet[j].bullet_body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds()) && chest[i].monster.state && bullet[j].state && chest[i].open)
+    {
+        bullet[j].state = false;
+        chest[i].monster.HP -= 15;
+        if (chest[i].monster.HP <= 0)player.score += 50;
+
+    }
+}
+
+void Game::collision4(int i, int j)
+{
+    if (bullet[j].bullet_body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&bullet[j].state && monster[i].state)
+    {
+        monster[i].HP -= 15;
+        bullet[j].state = false;
+        if (monster[i].HP <= 0)player.score += 50;
+    }
+}
+
+void Game::collision5()
+{
+}
 
 void Game::gamedraw(sf::RenderWindow& window,float time)
 {    
 
-
+    pewbullet();
     counttime = clock.getElapsedTime().asMilliseconds();
-    for (int i = 0; i < 15; i++) {    
+    for (int i = 0; i < 15; i++) {     
         collision1(i);
+        for (int j = 0; j < 3; j++)
+        {
+            collision3(i, j);
+        }
         chest[i].Update(player.Collision());
         chest[i].Draw(window,time);
     }
     for (int i = 0; i < 5; i++)
     {
         collision2(i);
+        for (int j = 0; j < 3; j++)
+        {
+            collision4(i, j);
+        }
         monster[i].update();
         monster[i].Draw(window);
 
     }    
-    itemtime[0] = clockitem[0].getElapsedTime().asSeconds();
-    if (itemtime[0] >= 5&&itemtime[0]<=10) {
-        item.Draw(window);
-        item.state = true;
-    }
-    else if (itemtime[0] > 10) {
+
+    for (int i = 0; i < 3; i++) {    
+        itemtime[i] = clockitem[i].getElapsedTime().asSeconds();
+        if (itemtime[i] >= 15+(i*5)&&itemtime[i]<=25+(i*5)) {
+        item[i].Draw(window);
+        item[i].state = true;
+        }
+        else if (itemtime[i] > 25+(i*5)) {
        // item.Draw(window);
-        clockitem[0].restart();
-        item.state = false;
-        item.randitem();
+        clockitem[i].restart();
+        item[i].state = false;
+        item[i].randitem();
+        }
+    }
+    for (int i = 0; i < 3; i++) {
+        if(bullet[i].state)bullet[i].Draw(window);
     }
     player.Update(time);
     player.Draw(window,time);    

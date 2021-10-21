@@ -24,7 +24,8 @@ Item::~Item()
 
 void Item::randitem()
 {	
-	item_type = randforitem(0, 2);
+	item_type = randforitem(0, 4);
+	if (item_type > 2)item_type = 0;
 	pos_x = float(randforitem(55, 1025));
 	pos_y = float(randforitem(200, 680));
 	body.setPosition(pos_x, pos_y);	
