@@ -21,9 +21,9 @@ private:
 	void collision4(int i, int j);		
 	void HPupdate();
 	void pewbullet();
-	void collision5();
+	void collision5(int i);
 	int numbullet;
-	sf::Clock clock,colorclock,clockitem[3],clockbullet;
+	sf::Clock clock,colorclock,clockitem[4],clockbullet;
 	float counttime,colortime,itemtime[3],timebullet;
 	Monsters monster[5];
 	Chest chest[15];

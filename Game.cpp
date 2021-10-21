@@ -116,13 +116,19 @@ void Game::collision4(int i, int j)
     }
 }
 
-void Game::collision5()
+void Game::collision5(int i)
 {
+    if (player.body.getGlobalBounds().intersects(item[i].body.getGlobalBounds())&&item[i].state&& sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+     //   if (item[i].item_type == 0) {
+            player.HP += 5;
+            item[i].state = false;
+
+     //   }
+    }
 }
 
 void Game::gamedraw(sf::RenderWindow& window,float time)
 {    
-
     pewbullet();
     counttime = clock.getElapsedTime().asMilliseconds();
     for (int i = 0; i < 15; i++) {     
@@ -145,8 +151,8 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         monster[i].Draw(window);
 
     }    
-
     for (int i = 0; i < 3; i++) {    
+ 
         itemtime[i] = clockitem[i].getElapsedTime().asSeconds();
         if (itemtime[i] >= 15+(i*5)&&itemtime[i]<=25+(i*5)) {
         item[i].Draw(window);
@@ -157,15 +163,19 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         clockitem[i].restart();
         item[i].state = false;
         item[i].randitem();
-        }
+        }        
+
     }
     for (int i = 0; i < 3; i++) {
         if(bullet[i].state)bullet[i].Draw(window);
     }
+    for (size_t i = 0; i <3; i++)
+    {
+        collision5(i);       
+    }
     player.Update(time);
     player.Draw(window,time);    
     HPupdate();
-
     window.draw(baseHP);
     window.draw(HP);    
    // if (player.HP <= 0); {
