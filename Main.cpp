@@ -11,10 +11,10 @@ int main()
     Background backgrounds;
     Clock clock[2];
     Game game;
-
+   // game.state = true;
     while (window.isOpen())
     {
-        deltaTime = clock[0].getElapsedTime().asMilliseconds();
+
         Event event;
         while (window.pollEvent(event))
         {
@@ -22,11 +22,15 @@ int main()
                 window.close();
             } 
         }
-        if (deltaTime > 15) {
-            clock[0].restart();
-        }        
-        backgrounds.Draw(window);
-        game.gamedraw(window,deltaTime);          
+        if (game.state==true) { 
+            deltaTime = clock[0].getElapsedTime().asMilliseconds();
+            if (deltaTime > 15) {
+                clock[0].restart();
+              }               
+            backgrounds.Draw(window);
+            game.gamedraw(window,deltaTime);          
+
+        }
 
         window.display();
         window.clear();

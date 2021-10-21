@@ -12,15 +12,16 @@ class Game
 public: 
 	Game();
 	~Game();
+	void gamedraw(sf::RenderWindow& window,float time);
+	bool state;
+private:	
 	void collision1(int i);
 	void collision2(int i);
 	void collision3(int i,int j);
-	void collision4(int i, int j);
-	void collision5();
-	void gamedraw(sf::RenderWindow& window,float time);
+	void collision4(int i, int j);		
 	void HPupdate();
 	void pewbullet();
-private:
+	void collision5();
 	int numbullet;
 	sf::Clock clock,colorclock,clockitem[3],clockbullet;
 	float counttime,colortime,itemtime[3],timebullet;

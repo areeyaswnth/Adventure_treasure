@@ -2,6 +2,7 @@
 
 Game::Game()
 {
+    state = true;
     HPsize_x = 500.0f;
     HPsize_y = 40.0f;
     HP.setPosition(50, 30);
@@ -164,8 +165,12 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
     player.Update(time);
     player.Draw(window,time);    
     HPupdate();
+
     window.draw(baseHP);
-    window.draw(HP);
+    window.draw(HP);    
+   // if (player.HP <= 0); {
+   //     state = false;
+   // }
 
 }
 

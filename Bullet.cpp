@@ -39,7 +39,7 @@ void Bullet::bullet_move()
 	if (dir == 2)	bullet_body.move(0.25f, 0.0f);
 	if (dir == 3) bullet_body.move(0.0f, -0.25f);
 	if (dir == 4)	bullet_body.move(0.0f, 0.25f);
-	if ((bullet_body.getPosition().x <= 0 || bullet_body.getPosition().x >= 1080) || (bullet_body.getPosition().y <= 0 || bullet_body.getPosition().y >= 720)) {
+	if ((bullet_body.getPosition().x < 0 || bullet_body.getPosition().x > 1080) || (bullet_body.getPosition().y < 0 || bullet_body.getPosition().y > 720)) {
 		state = false;
 	}
 }
