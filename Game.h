@@ -5,6 +5,7 @@
 #include"Chest.h"
 #include "Player.h"
 #include"Bullet.h"
+#include "Item.h"
 class Game
 {
 public: 
@@ -16,11 +17,12 @@ public:
 	void gamedraw(sf::RenderWindow& window,float time);
 	void HPupdate();
 private:
-	sf::Clock clock;
-	float counttime;
+	sf::Clock clock,colorclock,clockitem[2];
+	float counttime,colortime,itemtime[2];
 	Monsters monster[5];
 	Chest chest[15];
 	Player player;
+	Item item;
 	sf::RectangleShape HP,baseHP;
 	float HPsize_x;
 	float HPsize_y;

@@ -1,6 +1,5 @@
 #include "Game.h"
 
-
 Game::Game()
 {
     HPsize_x = 500.0f;
@@ -19,15 +18,21 @@ void Game::collision1(int i)
 {
 
     if (player.body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds())&&chest[i].monster.state&&counttime>=2000&&chest[i].open) {
-        player.HP-=5;
+        player.HP-=5;      
+        player.body.setFillColor(sf::Color(255, 0, 0, 100));
         clock.restart();
      //   std::cout <<"HP:"<<player.HP<<"\n";
-   }
+   }    
+    else
+    {
+        player.body.setFillColor(sf::Color(255, 255, 255, 255));
+    }
     if (player.bullet.bullet_body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds()) && chest[i].monster.state&&player.bullet.state&&chest[i].open)
     {
         player.bullet.state = false;
         chest[i].monster.HP -= 15;
         if (chest[i].monster.HP <= 0)player.score += 50;
+  
     }
     if (player.body.getGlobalBounds().intersects(chest[i].coin.shape.getGlobalBounds()) && chest[i].open && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && chest[i].coin.state && !chest[i].monster.state) {
         chest[i].box.setTextureRect(sf::IntRect(0, 0, chest[i].box_xsize, chest[i].box_ysize));
@@ -38,14 +43,22 @@ void Game::collision1(int i)
         player.score += 100;
         ///std::cout << "SCORE:" << player.score << "\n";
     }
+
 }
 
 void Game::collision2(int i)
 {
 
     if (player.body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&  counttime >= 2000 && monster[i].state ) {
-        player.HP-=10;
+        player.HP-=10;        
+        player.body.setFillColor(sf::Color(255, 0, 0, 100));
+      //  colortime = colorclock.getElapsedTime().asMilliseconds();
         clock.restart();
+
+    }    
+    else
+    {
+        player.body.setFillColor(sf::Color(255, 255, 255, 255));
     }
     if (player.bullet.bullet_body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds())  && player.bullet.state&&monster[i].state)
     {
@@ -53,6 +66,7 @@ void Game::collision2(int i)
         player.bullet.state = false;
         if(monster[i].HP<=0)player.score += 50;
     }
+
 }
 
 void Game::HPupdate()
@@ -83,6 +97,7 @@ void Game::HPupdate()
 void Game::gamedraw(sf::RenderWindow& window,float time)
 {    
 
+
     counttime = clock.getElapsedTime().asMilliseconds();
     for (int i = 0; i < 15; i++) {    
         collision1(i);
@@ -95,6 +110,17 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         monster[i].update();
         monster[i].Draw(window);
 
+    }    
+    itemtime[0] = clockitem[0].getElapsedTime().asSeconds();
+    if (itemtime[0] >= 5&&itemtime[0]<=10) {
+        item.Draw(window);
+        item.state = true;
+    }
+    else if (itemtime[0] > 10) {
+       // item.Draw(window);
+        clockitem[0].restart();
+        item.state = false;
+        item.randitem();
     }
     player.Update(time);
     player.Draw(window,time);    
