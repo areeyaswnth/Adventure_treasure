@@ -11,6 +11,7 @@ public:
 	sf::RectangleShape body;	
 	int item_type;	
 	bool	state;
+	bool  skillstate;
 private:
 	sf::Texture texture;
 

@@ -10,6 +10,10 @@ Game::Game()
     baseHP.setSize(sf::Vector2f(HPsize_x + 10, HPsize_y + 10));
     baseHP.setFillColor(sf::Color::White);
     numbullet = 0;
+    player.scorebonus = 1.0f;
+    skilltime[0] = 0;
+    item[0].skillstate = false;
+
 }
 
 Game::~Game()
@@ -35,8 +39,8 @@ void Game::collision1(int i)
         chest[i].coin.state = false;
         chest[i].monster.state = false;
         chest[i].randchest();
-        player.score += 100;
-        ///std::cout << "SCORE:" << player.score << "\n";
+        player.score += (100*player.scorebonus);
+        std::cout << "SCORE:" << player.score << "\n";
     }
 
 }
@@ -100,9 +104,12 @@ void Game::collision3(int i, int j)
     if (bullet[j].bullet_body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds()) && chest[i].monster.state && bullet[j].state && chest[i].open)
     {
         bullet[j].state = false;
-        chest[i].monster.HP -= 15;
-        if (chest[i].monster.HP <= 0)player.score += 50;
-
+        chest[i].monster.HP -= 10;
+        if (chest[i].monster.HP <= 0)
+        {
+            player.score += (20 * player.scorebonus);
+            std::cout << "SCORE:" << player.score << "\n";
+        }
     }
 }
 
@@ -110,77 +117,115 @@ void Game::collision4(int i, int j)
 {
     if (bullet[j].bullet_body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&bullet[j].state && monster[i].state)
     {
-        monster[i].HP -= 15;
+        monster[i].HP -= 10;
         bullet[j].state = false;
-        if (monster[i].HP <= 0)player.score += 50;
+        if (monster[i].HP <= 0)
+        {
+            player.score += (30 * player.scorebonus);
+            std::cout << "SCORE:" << player.score << "\n";
+        }
     }
 }
 
 void Game::collision5(int i)
 {
-    if (player.body.getGlobalBounds().intersects(item[i].body.getGlobalBounds())&&item[i].state&& sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-     //   if (item[i].item_type == 0) {
-            player.HP += 5;
+    skilltime[i] = skillclock[i].getElapsedTime().asSeconds();
+    if (item[i].body.getGlobalBounds().intersects(player.body.getGlobalBounds())&&item[i].state&&sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+        if (item[i].item_type == 0) {
+            if(player.HP<=95) player.HP += 5;       
             item[i].state = false;
+            clockitem[i].restart();
+        }
+        if (item[i].item_type==1)
+        {         
+            skills[i] = 1;
+            item[i].state = false;
+            item[i].skillstate = true;
+            skillclock[i].restart();
+            clockitem[i].restart();
 
-     //   }
+        }
+        if (item[i].item_type == 2) {  
+          //  item[i].skillstate = true;
+            item[i].state = false;
+            clockitem[i].restart();
+        }        
+
+
+    }                    
+    if (skills[i] == 1&& item[i].skillstate&&skilltime[i]<=10) {   
+            std::cout << skilltime[i]<<"\n";
+            player.scorebonus = 2.0f;
+     }
+    else if (skilltime[i] > 10 &&item[i].skillstate&&skills[i]==1) {
+        player.scorebonus = 1.0f;
+        item[i].skillstate = false;
     }
+
+   
+}
+
+void Game::skillitem(int i)
+{
+    if (item[i].skillstate && item[i].item_type == 1) {
+        player.scorebonus = 2.0f;
+
+    }
+    
+   // else if (item[i].skillstate && skilltime[i] > 10 && item[i].item_type == 1) player.scorebonus=1.0f;
 }
 
 void Game::gamedraw(sf::RenderWindow& window,float time)
-{    
-    pewbullet();
-    counttime = clock.getElapsedTime().asMilliseconds();
-    for (int i = 0; i < 15; i++) {     
-        collision1(i);
-        for (int j = 0; j < 3; j++)
-        {
-            collision3(i, j);
-        }
-        chest[i].Update(player.Collision());
-        chest[i].Draw(window,time);
-    }
-    for (int i = 0; i < 5; i++)
-    {
-        collision2(i);
-        for (int j = 0; j < 3; j++)
-        {
-            collision4(i, j);
-        }
-        monster[i].update();
-        monster[i].Draw(window);
+{
 
-    }    
-    for (int i = 0; i < 3; i++) {    
- 
-        itemtime[i] = clockitem[i].getElapsedTime().asSeconds();
-        if (itemtime[i] >= 15+(i*5)&&itemtime[i]<=25+(i*5)) {
-        item[i].Draw(window);
-        item[i].state = true;
+    if (player.HP>0)
+    {   
+        itemtime[0] = clockitem[0].getElapsedTime().asSeconds();
+        pewbullet();
+        counttime = clock.getElapsedTime().asMilliseconds();
+     //monster-map
+        for (int i = 0; i < 15; i++) {
+            collision1(i);
+            for (int j = 0; j < 3; j++)
+            {
+                collision3(i, j);
+            }
+            chest[i].Update(player.Collision());
+            chest[i].Draw(window, time);
         }
-        else if (itemtime[i] > 25+(i*5)) {
-       // item.Draw(window);
-        clockitem[i].restart();
-        item[i].state = false;
-        item[i].randitem();
-        }        
+    //monster-shape
+        for (int i = 0; i < 5; i++)
+        {
+            collision2(i);
+            for (int j = 0; j < 3; j++)
+            {
+                collision4(i, j);
+            }
+            monster[i].update();
+            monster[i].Draw(window);
 
+        }
+
+        //bullet
+        for (int i = 0; i < 3; i++) {
+            if (bullet[i].state)bullet[i].Draw(window);
+        }
+        if (itemtime[0] > 5) {
+            if (!item[0].state) {
+                item[0].randitem();
+                item[0].state = true;
+            }
+            item[0].Draw(window);
+        }
+        collision5(0);
+        skillitem(0);
+        player.Update(time);
+        player.Draw(window, time);
+        HPupdate();
+        window.draw(baseHP);
+        window.draw(HP);
     }
-    for (int i = 0; i < 3; i++) {
-        if(bullet[i].state)bullet[i].Draw(window);
-    }
-    for (size_t i = 0; i <3; i++)
-    {
-        collision5(i);       
-    }
-    player.Update(time);
-    player.Draw(window,time);    
-    HPupdate();
-    window.draw(baseHP);
-    window.draw(HP);    
-   // if (player.HP <= 0); {
-   //     state = false;
-   // }
+       
 
 }
 

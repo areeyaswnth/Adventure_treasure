@@ -22,9 +22,10 @@ private:
 	void HPupdate();
 	void pewbullet();
 	void collision5(int i);
+	void skillitem(int i);
 	int numbullet;
-	sf::Clock clock,colorclock,clockitem[4],clockbullet;
-	float counttime,colortime,itemtime[3],timebullet;
+	sf::Clock clock,colorclock,clockitem[2],clockbullet,skillclock[2];
+	float counttime,colortime,itemtime[2],timebullet,skilltime[2];
 	Monsters monster[5];
 	Chest chest[15];
 	Player player;
@@ -33,5 +34,6 @@ private:
 	sf::RectangleShape HP,baseHP;
 	float HPsize_x;
 	float HPsize_y;
+	int skills[2];
 };
 

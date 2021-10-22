@@ -10,7 +10,8 @@ public:
 	sf::FloatRect Collision();
 	sf::RectangleShape body;	
 	int HP;	
-	size_t score;		
+	size_t score;	
+	float scorebonus;
 	int dir_bullet;
 private:
 	sf::Texture bullettexture;

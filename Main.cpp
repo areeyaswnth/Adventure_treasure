@@ -22,7 +22,7 @@ int main()
                 window.close();
             } 
         }
-        if (game.state==true) { 
+        if (game.state) { 
             deltaTime = clock[0].getElapsedTime().asMilliseconds();
             if (deltaTime > 15) {
                 clock[0].restart();
