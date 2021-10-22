@@ -147,33 +147,21 @@ void Game::collision5(int i)
         }
         if (item[i].item_type == 2) {  
           //  item[i].skillstate = true;
+            player.score += 1000;
             item[i].state = false;
             clockitem[i].restart();
-        }        
-
-
+        }       
     }                    
-    if (skills[i] == 1&& item[i].skillstate&&skilltime[i]<=10) {   
+    if (skills[i] == 1 && item[i].skillstate && item[i].state) {
             std::cout << skilltime[i]<<"\n";
             player.scorebonus = 2.0f;
      }
-    else if (skilltime[i] > 10 &&item[i].skillstate&&skills[i]==1) {
-        player.scorebonus = 1.0f;
-        item[i].skillstate = false;
-    }
-
-   
+    else if (skilltime[i] > 10 &&item[i].skillstate) {
+             player.scorebonus = 1.0f;
+             item[i].skillstate = false;
+    } 
 }
 
-void Game::skillitem(int i)
-{
-    if (item[i].skillstate && item[i].item_type == 1) {
-        player.scorebonus = 2.0f;
-
-    }
-    
-   // else if (item[i].skillstate && skilltime[i] > 10 && item[i].item_type == 1) player.scorebonus=1.0f;
-}
 
 void Game::gamedraw(sf::RenderWindow& window,float time)
 {
