@@ -138,28 +138,27 @@ void Game::collision5(int i)
         }
         if (item[i].item_type==1)
         {         
+            player.scorebonus = 2.0f;
             skills[i] = 1;
             item[i].state = false;
             item[i].skillstate = true;
             skillclock[i].restart();
             clockitem[i].restart();
-
         }
         if (item[i].item_type == 2) {  
-          //  item[i].skillstate = true;
-            player.score += 1000;
+            player.score += 500;
             item[i].state = false;
             clockitem[i].restart();
         }       
     }                    
-    if (skills[i] == 1 && item[i].skillstate && item[i].state) {
-            std::cout << skilltime[i]<<"\n";
+    if (skilltime[i]<10&&item[i].skillstate)
+    {
+          //  std::cout << skilltime[i]<<"\n";
             player.scorebonus = 2.0f;
      }
-    else if (skilltime[i] > 10 &&item[i].skillstate) {
-             player.scorebonus = 1.0f;
-             item[i].skillstate = false;
-    } 
+    if (skilltime[i] >= 10 && item[i].skillstate) {
+            player.scorebonus = 1.0f;
+    }
 }
 
 
@@ -206,7 +205,6 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
             item[0].Draw(window);
         }
         collision5(0);
-        skillitem(0);
         player.Update(time);
         player.Draw(window, time);
         HPupdate();
