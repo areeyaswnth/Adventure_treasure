@@ -19,6 +19,8 @@ public:
 private:	
 	sf::SoundBuffer buffer[5];
 	sf::Sound sound[5];
+	sf::Font font;
+	void scoreupdate();
 	void collision1(int i);
 	void collision2(int i);
 	void collision3(int i,int j);
@@ -34,6 +36,7 @@ private:
 	Player player;
 	Item item[3];
 	Bullet bullet[3];
+	sf::Text textscore,score;
 	sf::RectangleShape HP,baseHP;
 	float HPsize_x;
 	float HPsize_y;

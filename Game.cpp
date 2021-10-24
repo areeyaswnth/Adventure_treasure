@@ -1,7 +1,9 @@
 #include "Game.h"
-
+#include<sstream>
+#include<string.h>
 Game::Game()
 {
+    //sound
     buffer[0].loadFromFile("sound/Hit.wav");
     sound[0].setBuffer(buffer[0]);
     buffer[1].loadFromFile("sound/item.wav");
@@ -12,6 +14,12 @@ Game::Game()
     sound[3].setBuffer(buffer[3]);
     buffer[4].loadFromFile("sound/bullet.wav");
     sound[4].setBuffer(buffer[4]);
+    //text    
+    font.loadFromFile("font/8Bit.ttf");
+    sf::Text ttext("score", font, 60);
+    textscore = ttext;
+    score = ttext;
+    score.setString("0000000");
     state = true;
     HPsize_x = 500.0f;
     HPsize_y = 40.0f;
@@ -30,15 +38,27 @@ Game::~Game()
 {
 }
 
+void Game::scoreupdate()
+{
+    std::stringstream ss;
+    ss << player.score;
+    std::string str = ss.str();
+    while (str.length() < 6) {
+        str.insert(0, "0");
+    }
+    score.setString(str);
+    textscore.setPosition(940,0);
+    score.setCharacterSize(90);
+    score.setPosition(830, 30);
+}
+
 void Game::collision1(int i)
 {
 
     if (player.body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds())&&chest[i].monster.state&&counttime>=2000&&chest[i].open) {
         player.HP-=5;      
         sound[0].play();
-      //  player.body.setFillColor(sf::Color(255, 0, 0, 100));
         clock.restart();
-     //   std::cout <<"HP:"<<player.HP<<"\n";
    }    
 
     if (player.body.getGlobalBounds().intersects(chest[i].coin.shape.getGlobalBounds()) && chest[i].open && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && chest[i].coin.state && !chest[i].monster.state) {
@@ -49,7 +69,7 @@ void Game::collision1(int i)
         chest[i].monster.state = false;
         chest[i].randchest();
         player.score += (100*player.scorebonus);
-        std::cout << "SCORE:" << player.score << "\n";
+     //   std::cout << "SCORE:" << player.score << "\n";
     }
 
 }
@@ -120,7 +140,7 @@ void Game::collision3(int i, int j)
         {
             player.score += (20 * player.scorebonus);
             sound[2].play();
-            std::cout << "SCORE:" << player.score << "\n";
+         //   std::cout << "SCORE:" << player.score << "\n";
         }
     }
 }
@@ -135,7 +155,7 @@ void Game::collision4(int i, int j)
         {
             sound[2].play();
             player.score += (30 * player.scorebonus);
-            std::cout << "SCORE:" << player.score << "\n";
+           // std::cout << "SCORE:" << player.score << "\n";
         }
     }
 }
@@ -167,7 +187,6 @@ void Game::collision5(int i)
     }                    
     if (skilltime[i]<10&&item[i].skillstate)
     {
-          //  std::cout << skilltime[i]<<"\n";
             player.scorebonus = 2.0f;
      }
     if (skilltime[i] >= 10 && item[i].skillstate) {
@@ -224,6 +243,9 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         HPupdate();
         window.draw(baseHP);
         window.draw(HP);
+        scoreupdate();        
+        window.draw(textscore);
+        window.draw(score);
     }
        
 
