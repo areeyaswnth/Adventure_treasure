@@ -1,12 +1,14 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include<SFML/Audio.hpp>
 #include"Monsters.h"
 #include"Chest.h"
 #include "Player.h"
 #include"Bullet.h"
 #include "Item.h"
 #include "Bullet.h"
+
 class Game
 {
 public: 
@@ -15,6 +17,8 @@ public:
 	void gamedraw(sf::RenderWindow& window,float time);
 	bool state;
 private:	
+	sf::SoundBuffer buffer[3];
+	sf::Sound sound[5];
 	void collision1(int i);
 	void collision2(int i);
 	void collision3(int i,int j);

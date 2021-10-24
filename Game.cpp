@@ -2,6 +2,12 @@
 
 Game::Game()
 {
+    buffer[0].loadFromFile("sound/Hit.wav");
+    sound[0].setBuffer(buffer[0]);
+    buffer[1].loadFromFile("sound/item.wav");
+    sound[1].setBuffer(buffer[1]);
+    buffer[2].loadFromFile("sound/monsdie.wav");
+    sound[2].setBuffer(buffer[2]);
     state = true;
     HPsize_x = 500.0f;
     HPsize_y = 40.0f;
@@ -25,6 +31,7 @@ void Game::collision1(int i)
 
     if (player.body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds())&&chest[i].monster.state&&counttime>=2000&&chest[i].open) {
         player.HP-=5;      
+        sound[0].play();
       //  player.body.setFillColor(sf::Color(255, 0, 0, 100));
         clock.restart();
      //   std::cout <<"HP:"<<player.HP<<"\n";
@@ -50,6 +57,7 @@ void Game::collision2(int i)
 
     if (player.body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&  counttime >= 2000 && monster[i].state ) {
         player.HP-=10;        
+        sound[0].play();
         player.body.setFillColor(sf::Color(255, 0, 0, 100));
       //  colortime = colorclock.getElapsedTime().asMilliseconds();
         clock.restart();
@@ -108,6 +116,7 @@ void Game::collision3(int i, int j)
         if (chest[i].monster.HP <= 0)
         {
             player.score += (20 * player.scorebonus);
+            sound[2].play();
             std::cout << "SCORE:" << player.score << "\n";
         }
     }
@@ -121,6 +130,7 @@ void Game::collision4(int i, int j)
         bullet[j].state = false;
         if (monster[i].HP <= 0)
         {
+            sound[2].play();
             player.score += (30 * player.scorebonus);
             std::cout << "SCORE:" << player.score << "\n";
         }
@@ -150,6 +160,7 @@ void Game::collision5(int i)
             item[i].state = false;
             clockitem[i].restart();
         }       
+        sound[1].play();
     }                    
     if (skilltime[i]<10&&item[i].skillstate)
     {
