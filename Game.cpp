@@ -8,6 +8,10 @@ Game::Game()
     sound[1].setBuffer(buffer[1]);
     buffer[2].loadFromFile("sound/monsdie.wav");
     sound[2].setBuffer(buffer[2]);
+    buffer[3].loadFromFile("sound/coin.wav");
+    sound[3].setBuffer(buffer[3]);
+    buffer[4].loadFromFile("sound/bullet.wav");
+    sound[4].setBuffer(buffer[4]);
     state = true;
     HPsize_x = 500.0f;
     HPsize_y = 40.0f;
@@ -36,11 +40,9 @@ void Game::collision1(int i)
         clock.restart();
      //   std::cout <<"HP:"<<player.HP<<"\n";
    }    
-    else
-    {
-        player.body.setFillColor(sf::Color(255, 255, 255, 255));
-    }
+
     if (player.body.getGlobalBounds().intersects(chest[i].coin.shape.getGlobalBounds()) && chest[i].open && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && chest[i].coin.state && !chest[i].monster.state) {
+        sound[3].play();
         chest[i].box.setTextureRect(sf::IntRect(0, 0, chest[i].box_xsize, chest[i].box_ysize));
         chest[i].open = false;
         chest[i].coin.state = false;
@@ -56,7 +58,7 @@ void Game::collision2(int i)
 {
 
     if (player.body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&  counttime >= 2000 && monster[i].state ) {
-        player.HP-=10;        
+        player.HP-=5;        
         sound[0].play();
         player.body.setFillColor(sf::Color(255, 0, 0, 100));
       //  colortime = colorclock.getElapsedTime().asMilliseconds();
@@ -98,6 +100,7 @@ void Game::pewbullet()
 {
     timebullet = clockbullet.getElapsedTime().asMilliseconds();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&timebullet>=300&&!bullet[numbullet].state) {
+        sound[4].play();
         bullet[numbullet].state = true;
         bullet[numbullet].pos(player.body.getPosition().x, player.body.getPosition().y,player.dir_bullet);
         numbullet++;
@@ -112,7 +115,7 @@ void Game::collision3(int i, int j)
     if (bullet[j].bullet_body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds()) && chest[i].monster.state && bullet[j].state && chest[i].open)
     {
         bullet[j].state = false;
-        chest[i].monster.HP -= 10;
+        chest[i].monster.HP -= 15;
         if (chest[i].monster.HP <= 0)
         {
             player.score += (20 * player.scorebonus);
@@ -126,7 +129,7 @@ void Game::collision4(int i, int j)
 {
     if (bullet[j].bullet_body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&bullet[j].state && monster[i].state)
     {
-        monster[i].HP -= 10;
+        monster[i].HP -= 15;
         bullet[j].state = false;
         if (monster[i].HP <= 0)
         {

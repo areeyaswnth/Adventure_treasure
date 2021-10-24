@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include"Background.h"
 #include"Game.h"
+#include"themesong.h"
 using namespace sf;
 int main()
 {
@@ -11,6 +12,7 @@ int main()
     Background backgrounds;
     Clock clock[2];
     Game game;
+    themesong song;
    // game.state = true;
     while (window.isOpen())
     {
@@ -23,6 +25,7 @@ int main()
             } 
         }
         if (game.state) { 
+            song.Play();
             deltaTime = clock[0].getElapsedTime().asMilliseconds();
             if (deltaTime > 15) {
                 clock[0].restart();

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 class Chest {
 public:
 	Chest();
@@ -31,6 +32,8 @@ public:
 	int box_xsize;
 	int box_ysize;
 private:
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
 	sf::Clock clock;
 	float timeC;
 	sf::Texture chest_texture;

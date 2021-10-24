@@ -1,5 +1,6 @@
 #include "Chest.h"
 #include<time.h>
+
 using namespace std;
 
 float randrange(int start, int stop) {
@@ -8,6 +9,8 @@ float randrange(int start, int stop) {
 }
 Chest::Chest()
 {
+	buffer.loadFromFile("sound/chest.wav");
+	sound.setBuffer(buffer);
 	chest_texture.loadFromFile("graphics/chest.png");
 	box.setTexture(&chest_texture);
 	box.setSize(sf::Vector2f(55.20f, 62.4f));
@@ -44,7 +47,8 @@ void Chest::Update(sf::FloatRect p1)
 	if (box.getGlobalBounds().intersects(p1)&& sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)&&coin.state==false&&open==false) {
 		box.setTextureRect(sf::IntRect(box_xsize, 0, box_xsize, box_ysize));
 		open = true;
-		coin.state = true;		
+		coin.state = true;	
+		sound.play();
 	}
 }
 

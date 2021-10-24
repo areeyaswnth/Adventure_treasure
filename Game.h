@@ -17,7 +17,7 @@ public:
 	void gamedraw(sf::RenderWindow& window,float time);
 	bool state;
 private:	
-	sf::SoundBuffer buffer[3];
+	sf::SoundBuffer buffer[5];
 	sf::Sound sound[5];
 	void collision1(int i);
 	void collision2(int i);
