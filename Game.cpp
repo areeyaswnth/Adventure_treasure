@@ -14,13 +14,15 @@ Game::Game()
     sound[3].setBuffer(buffer[3]);
     buffer[4].loadFromFile("sound/bullet.wav");
     sound[4].setBuffer(buffer[4]);
+    buffer[5].loadFromFile("sound/over.wav");
+    sound[5].setBuffer(buffer[5]);
     //text    
     font.loadFromFile("font/8Bit.ttf");
     sf::Text ttext("score", font, 60);
     textscore = ttext;
     score = ttext;
+    gameover = ttext;
     score.setString("0000000");
-    state = true;
     HPsize_x = 500.0f;
     HPsize_y = 40.0f;
     HP.setPosition(50, 30);
@@ -31,6 +33,7 @@ Game::Game()
     player.scorebonus = 1.0f;
     skilltime[0] = 0;
     item[0].skillstate = false;
+    int countover=0;
 
 }
 
@@ -78,7 +81,7 @@ void Game::collision2(int i)
 {
 
     if (player.body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&  counttime >= 2000 && monster[i].state ) {
-        player.HP-=5;        
+        player.HP-=10;        
         sound[0].play();
         player.body.setFillColor(sf::Color(255, 0, 0, 100));
       //  colortime = colorclock.getElapsedTime().asMilliseconds();
@@ -194,10 +197,17 @@ void Game::collision5(int i)
     }
 }
 
+void Game::over()
+{
+    gameover.setString("GAME OVER");
+    gameover.setCharacterSize(100);    
+    gameover.setOrigin(gameover.getGlobalBounds().width/2, gameover.getGlobalBounds().height/2);
+    gameover.setPosition(540, 360);
+}
+
 
 void Game::gamedraw(sf::RenderWindow& window,float time)
 {
-
     if (player.HP>0)
     {   
         itemtime[0] = clockitem[0].getElapsedTime().asSeconds();
@@ -246,6 +256,18 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         scoreupdate();        
         window.draw(textscore);
         window.draw(score);
+        state = true;
+    }
+    else
+    {
+
+        over();
+        if (sound[5].getStatus()!= sf::Music::Status::Playing&&countover!=1) {
+            sound[5].play();
+            countover=1;
+        }
+
+        window.draw(gameover);
     }
        
 

@@ -17,8 +17,8 @@ public:
 	void gamedraw(sf::RenderWindow& window,float time);
 	bool state;
 private:	
-	sf::SoundBuffer buffer[5];
-	sf::Sound sound[5];
+	sf::SoundBuffer buffer[6];
+	sf::Sound sound[6];
 	sf::Font font;
 	void scoreupdate();
 	void collision1(int i);
@@ -28,6 +28,7 @@ private:
 	void HPupdate();
 	void pewbullet();
 	void collision5(int i);
+	void over();
 	int numbullet;
 	sf::Clock clock,colorclock,clockitem[2],clockbullet,skillclock[2];
 	float counttime,colortime,itemtime[2],timebullet,skilltime[2];
@@ -36,10 +37,11 @@ private:
 	Player player;
 	Item item[3];
 	Bullet bullet[3];
-	sf::Text textscore,score;
+	sf::Text textscore,score,gameover;
 	sf::RectangleShape HP,baseHP;
 	float HPsize_x;
 	float HPsize_y;
 	int skills[2];
+	int countover;
 };
 

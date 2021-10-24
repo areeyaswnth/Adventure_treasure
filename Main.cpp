@@ -34,6 +34,10 @@ int main()
             game.gamedraw(window,deltaTime);          
 
         }
+        else
+        {
+
+        }
 
         window.display();
         window.clear();
