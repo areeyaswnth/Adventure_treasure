@@ -49,7 +49,7 @@ void Chest::Update(sf::FloatRect p1)
 		open = true;
 		coin.state = true;	
 		sound.play();
-		sound.setVolume(20);
+		sound.setVolume(10);
 	}
 }
 

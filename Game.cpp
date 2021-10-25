@@ -59,12 +59,14 @@ void Game::collision1(int i)
 {
 
     if (player.body.getGlobalBounds().intersects(chest[i].monster.shape.getGlobalBounds())&&chest[i].monster.state&&counttime>=2000&&chest[i].open) {
-        player.HP-=5;      
+        player.HP-=5;   
+        sound[0].setVolume(20);
         sound[0].play();
         clock.restart();
    }    
 
     if (player.body.getGlobalBounds().intersects(chest[i].coin.shape.getGlobalBounds()) && chest[i].open && sf::Keyboard::isKeyPressed(sf::Keyboard::F) && chest[i].coin.state && !chest[i].monster.state) {
+        sound[3].setVolume(20);
         sound[3].play();
         chest[i].box.setTextureRect(sf::IntRect(0, 0, chest[i].box_xsize, chest[i].box_ysize));
         chest[i].open = false;
@@ -81,7 +83,8 @@ void Game::collision2(int i)
 {
 
     if (player.body.getGlobalBounds().intersects(monster[i].body.getGlobalBounds()) &&  counttime >= 2000 && monster[i].state ) {
-        player.HP-=10;        
+        player.HP-=10;
+        sound[0].setVolume(20);
         sound[0].play();
         player.body.setFillColor(sf::Color(255, 0, 0, 100));
       //  colortime = colorclock.getElapsedTime().asMilliseconds();
@@ -123,6 +126,7 @@ void Game::pewbullet()
 {
     timebullet = clockbullet.getElapsedTime().asMilliseconds();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&timebullet>=300&&!bullet[numbullet].state) {
+        sound[4].setVolume(20); 
         sound[4].play();
         bullet[numbullet].state = true;
         bullet[numbullet].pos(player.body.getPosition().x, player.body.getPosition().y,player.dir_bullet);
@@ -142,6 +146,7 @@ void Game::collision3(int i, int j)
         if (chest[i].monster.HP <= 0)
         {
             player.score += (20 * player.scorebonus);
+            sound[2].setVolume(20);
             sound[2].play();
          //   std::cout << "SCORE:" << player.score << "\n";
         }
@@ -156,6 +161,7 @@ void Game::collision4(int i, int j)
         bullet[j].state = false;
         if (monster[i].HP <= 0)
         {
+            sound[2].setVolume(20);
             sound[2].play();
             player.score += (30 * player.scorebonus);
            // std::cout << "SCORE:" << player.score << "\n";
@@ -185,7 +191,8 @@ void Game::collision5(int i)
             player.score += 500;
             item[i].state = false;
             clockitem[i].restart();
-        }       
+        }
+        sound[1].setVolume(10);
         sound[1].play();
     }                    
     if (skilltime[i]<10&&item[i].skillstate)
