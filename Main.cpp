@@ -9,10 +9,7 @@ int main()
 {
     srand((int)time(0));
     RenderWindow window(sf::VideoMode(1080, 720), "Game");
-    float deltaTime = 0.0f;
-    Background backgrounds;
-    Clock clock[2];
-    Game game;
+
     themesong song;
     Menugame menu;
    // game.state = true;
@@ -26,19 +23,8 @@ int main()
                 window.close();
             } 
         }
-
-        if (game.state) {        
-  
-          //  song.Play();
-           // deltaTime = clock[0].getElapsedTime().asMilliseconds();
-           // if (deltaTime > 15) {
-           //     clock[0].restart();
-           //   }               
-           // backgrounds.Draw(window);
-           // game.gamedraw(window,deltaTime);          
-            menu.Draw(window);
-        }
-
+        song.Play();      
+        menu.Draw(window);
         window.display();
         window.clear();
     } 

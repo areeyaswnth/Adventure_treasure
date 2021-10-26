@@ -34,6 +34,8 @@ Menugame::Menugame()
 	ary.setOrigin(ary.getGlobalBounds().width / 2, ary.getGlobalBounds().height / 2);
 	ary.setPosition(sf::Vector2f(360,680));
 	ary.setFont(misname);
+	menu_state = true;
+	game_state = false;
 
 }
 
@@ -44,24 +46,28 @@ Menugame::~Menugame()
 
 void Menugame::update(sf::RenderWindow& window)
 {
-	 if (play.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+	 if (play.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && sf::Mouse::isButtonPressed(sf::Mouse::Left)&&menu_state) {
 		play.setFillColor(sf::Color(255, 255, 255, 0));
+		menu_state = false;	
+		game_state = true;
 	}
-	else if (play.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
+	else if (play.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)&&menu_state) {
 		play.setFillColor(sf::Color(255, 255, 255, 100));
+		
+	
 	}
 	else
 	{
 		play.setFillColor(sf::Color::White);
 	}
-	if (Howto.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
+	if (Howto.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)&&menu_state) {
 		Howto.setFillColor(sf::Color(255, 255, 255, 100));
 	}
 	else
 	{
 		Howto.setFillColor(sf::Color::White);
 	}
-	if (Highscore.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
+	if (Highscore.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)&&menu_state) {
 		Highscore.setFillColor(sf::Color(255, 255, 255, 100));
 	}
 	else
@@ -76,11 +82,23 @@ void Menugame::mouseclick(sf::RenderWindow& window)
 }
 void Menugame::Draw(sf::RenderWindow& window)
 {
+	if (menu_state) {
 	update(window);
 	window.draw(ary);
 	window.draw(Howto);
 	window.draw(Highscore);
 	window.draw(play);
 	window.draw(Name);
+	}
+	if (game_state && !menu_state) {
+		deltaTime = clock[0].getElapsedTime().asMilliseconds();
+		if (deltaTime > 15) {
+			clock[0].restart();
+		}
+		backgrounds.Draw(window);
+		game.gamedraw(window, deltaTime);
+
+	}
+
 }
 
