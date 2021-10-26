@@ -39,6 +39,7 @@ Game::Game()
 
 Game::~Game()
 {
+
 }
 
 void Game::scoreupdate()
@@ -204,12 +205,26 @@ void Game::collision5(int i)
     }
 }
 
-void Game::over()
+bool Game::over()
 {
     gameover.setString("GAME OVER");
     gameover.setCharacterSize(100);    
     gameover.setOrigin(gameover.getGlobalBounds().width/2, gameover.getGlobalBounds().height/2);
-    gameover.setPosition(540, 360);
+    gameover.setPosition(540, 360);        
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)&&player.HP<=0) {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Game::reset()
+{
+    player.HP = 100;
+    player.score = 0;
+    countover = 0;
 }
 
 
@@ -277,11 +292,6 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
             countover=1;
         }
         window.draw(gameover);
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-            player.HP = 100;
-            countover = 0;
-            player.score = 0;
-        }
     }
        
 

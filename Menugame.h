@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include<SFML/Audio.hpp>
 #include"Game.h"
 #include"Background.h"
+#include"Howtoplay.h"
 class Menugame
 {
 public: 
@@ -12,6 +14,8 @@ public:
 	void Draw(sf::RenderWindow& window);
 	void mouseclick(sf::RenderWindow& window);
 private:
+	sf::SoundBuffer buffer;
+	sf::Sound clicksound;
 	bool menu_state, game_state, howto_state, highscore_state;
 	sf::Text play,Highscore,Howto,Name,ary;
 	sf::Font font,misname;
@@ -19,5 +23,6 @@ private:
 	Background backgrounds;
 	sf::Clock clock[2];
 	Game game;
+	Howtoplay howto;
 };
 

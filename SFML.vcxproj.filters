@@ -48,7 +48,7 @@
     <ClCompile Include="Menugame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="howto.cpp">
+    <ClCompile Include="Howtoplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,7 +83,7 @@
     <ClInclude Include="Menugame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="howto.h">
+    <ClInclude Include="Howtoplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
