@@ -17,9 +17,11 @@ Monsters::Monsters()
 	body.setPosition(randrangemonster(55, 1025), randrangemonster(200,680));
 	pos_x = body.getPosition().x;
 	pos_y = body.getPosition().y;
-	speed = 0.05;
-//	speed= randrangemonster(2, 8) * 0.01;
-	dir = randrangemonster(-1,1);
+//	speed = 0.05f;
+	speed= randrangemonster(2, 8) * 0.01;
+	step = randrangemonster(100, 250);
+	dirx = randrangemonster(1,2);
+	diry = randrangemonster(1, 2);
 }
 
 Monsters::~Monsters()
@@ -30,13 +32,21 @@ Monsters::~Monsters()
 
 void Monsters::update()
 {	
-	if (dir == 1) body.move(speed, 0);
-	else body.move(-speed, 0);
-	if (body.getPosition().x > (pos_x + 200)|| body.getPosition().x > 1080) {
-		dir = -1;
+	if (dirx == 1) body.move(speed, 0);
+	else if(dirx==2)  body.move(-speed, 0);
+	if (body.getPosition().x > (pos_x + step)|| body.getPosition().x > 1080) {
+		dirx = +2;
 	}
-	else if (body.getPosition().x <( pos_x - 200) || body.getPosition().x < 0) {
-		dir = +1;
+	else if (body.getPosition().x <( pos_x - step) || body.getPosition().x < 0) {
+		dirx = +1;
+	}
+	if (diry == 1) body.move(0,speed);
+	else if (diry == 2)  body.move(0, -speed);
+	if (body.getPosition().y > (pos_y + step) || body.getPosition().y > 720) {
+		diry = +2;
+	}
+	else if (body.getPosition().y < (pos_y - step) || body.getPosition().y < 0) {
+		diry = +1;
 	}
 }
 
