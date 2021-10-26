@@ -19,9 +19,10 @@ Monsters::Monsters()
 	pos_y = body.getPosition().y;
 //	speed = 0.05f;
 	speed= randrangemonster(2, 8) * 0.01;
-	step = randrangemonster(100, 250);
+	step = randrangemonster(100, 350);
 	dirx = randrangemonster(1,2);
-	diry = randrangemonster(1, 2);
+	diry = 0;
+//	diry = randrangemonster(1, 2);
 }
 
 Monsters::~Monsters()

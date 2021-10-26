@@ -264,6 +264,9 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         window.draw(textscore);
         window.draw(score);
         state = true;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+            player.HP = 0;
+        }
     }
     else
     {
@@ -273,8 +276,12 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
             sound[5].play();
             countover=1;
         }
-
         window.draw(gameover);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+            player.HP = 100;
+            countover = 0;
+            player.score = 0;
+        }
     }
        
 
