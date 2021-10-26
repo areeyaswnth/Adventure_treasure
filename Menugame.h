@@ -1,0 +1,17 @@
+#pragma once
+#include <iostream>
+#include <SFML/Graphics.hpp>
+class Menugame
+{
+public: 
+	Menugame();
+	~Menugame();
+	void update(sf::RenderWindow& window);
+	void Draw(sf::RenderWindow& window);
+	void mouseclick(sf::RenderWindow& window);
+private:
+	bool menu_state, game_state, howto_state, highscore_state;
+	sf::Text play,Highscore,Howto,Name,ary;
+	sf::Font font,misname;
+};
+

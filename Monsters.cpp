@@ -55,7 +55,7 @@ void Monsters::Draw(sf::RenderWindow& window)
 {
 	
 	if (HP > 0) {
-		state = true;
+		state = true;	
 	window.draw(body);
 	}
 	else

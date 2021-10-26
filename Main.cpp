@@ -3,6 +3,7 @@
 #include"Background.h"
 #include"Game.h"
 #include"themesong.h"
+#include"Menugame.h"
 using namespace sf;
 int main()
 {
@@ -13,6 +14,7 @@ int main()
     Clock clock[2];
     Game game;
     themesong song;
+    Menugame menu;
    // game.state = true;
     while (window.isOpen())
     {
@@ -24,25 +26,21 @@ int main()
                 window.close();
             } 
         }
-        if (game.state) { 
-            song.Play();
-            deltaTime = clock[0].getElapsedTime().asMilliseconds();
-            if (deltaTime > 15) {
-                clock[0].restart();
-              }               
-            backgrounds.Draw(window);
-            game.gamedraw(window,deltaTime);          
 
-        }
-        else
-        {
-
+        if (game.state) {        
+  
+          //  song.Play();
+           // deltaTime = clock[0].getElapsedTime().asMilliseconds();
+           // if (deltaTime > 15) {
+           //     clock[0].restart();
+           //   }               
+           // backgrounds.Draw(window);
+           // game.gamedraw(window,deltaTime);          
+            menu.Draw(window);
         }
 
         window.display();
         window.clear();
-
-    }
-    
+    } 
     return 0;
 }

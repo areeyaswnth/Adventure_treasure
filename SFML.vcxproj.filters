@@ -45,6 +45,12 @@
     <ClCompile Include="themesong.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Menugame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="howto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -72,6 +78,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="themesong.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menugame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="howto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -151,8 +151,10 @@
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="font.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="howto.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menugame.cpp" />
     <ClCompile Include="Monsters.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="themesong.cpp" />
@@ -163,7 +165,9 @@
     <ClInclude Include="Chest.h" />
     <ClInclude Include="font.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="howto.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Menugame.h" />
     <ClInclude Include="Monsters.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="themesong.h" />
