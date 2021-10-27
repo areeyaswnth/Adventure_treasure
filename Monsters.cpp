@@ -41,14 +41,14 @@ void Monsters::update()
 	else if (body.getPosition().x <( pos_x - step) || body.getPosition().x < 0) {
 		dirx = +1;
 	}
-	if (diry == 1) body.move(0,speed);
+	/*if (diry == 1) body.move(0, speed);
 	else if (diry == 2)  body.move(0, -speed);
 	if (body.getPosition().y > (pos_y + step) || body.getPosition().y > 720) {
 		diry = +2;
 	}
 	else if (body.getPosition().y < (pos_y - step) || body.getPosition().y < 0) {
 		diry = +1;
-	}
+	}*/
 }
 
 void Monsters::Draw(sf::RenderWindow& window)

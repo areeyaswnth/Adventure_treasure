@@ -14,6 +14,8 @@ public:
 	void Draw(sf::RenderWindow& window);
 	bool Exit(sf::RenderWindow& window);
 private:
+	//sf::SoundBuffer buffer;
+	//sf::Sound clicksound;
 	sf::Font font;
 	sf::Text main,exit,keytext;
 	struct fortext

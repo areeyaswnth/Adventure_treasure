@@ -109,9 +109,9 @@ void Howtoplay::key()
 	player.body.setTextureRect(sf::IntRect(0, 0, body_xsize, body_ysize));
 	int animationFrame = 0;
 	keytext.setFont(font);
-	keytext.setCharacterSize(35);
+	keytext.setCharacterSize(30);
 	keytext.setFillColor(sf::Color::White);
-	keytext.setString("W เคลื่อนที่ขึ้นข้างบน\nA เคลื่อนที่ไปทางซ้าย\nS เคลื่อนที่ลงข้างล่าง\nD เคลื่อนที่ไปทางขวา\nF รับของ\nspacebar ยิงกระสุน\nenter เปิดกล่องสมบัติ");
+	keytext.setString("W เคลื่อนที่ขึ้นข้างบน\nA เคลื่อนที่ไปทางซ้าย\nS เคลื่อนที่ลงข้างล่าง\nD เคลื่อนที่ไปทางขวา\nF รับitemหรือcoin\nspacebar ยิงกระสุน\nenter เปิดกล่องสมบัติ\nXเพื่อออก\nRเพื่อเริ่มใหม่");
 	keytext.setPosition(540, 130);
 	keytext.setStyle(sf::Text::Style::Bold);
 }
@@ -127,9 +127,9 @@ void Howtoplay::chestset()
 	chest.body.setPosition(480, 540);
 	chest.text[0].setFont(font);
 	chest.text[0].setFillColor(sf::Color::White);
-	chest.text[0].setCharacterSize(45);
+	chest.text[0].setCharacterSize(30);
 	chest.text[0].setString("Coin\nได้รับscore+100");
-	chest.text[0].setPosition(620, 540);
+	chest.text[0].setPosition(620, 580);
 	chest.text[0].setStyle(sf::Text::Style::Bold);
 }
 

@@ -16,6 +16,7 @@ Game::Game()
     sound[4].setBuffer(buffer[4]);
     buffer[5].loadFromFile("sound/over.wav");
     sound[5].setBuffer(buffer[5]);
+    sound[5].setVolume(20);
     //text    
     font.loadFromFile("font/8Bit.ttf");
     sf::Text ttext("score", font, 60);
@@ -127,7 +128,7 @@ void Game::pewbullet()
 {
     timebullet = clockbullet.getElapsedTime().asMilliseconds();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&timebullet>=300&&!bullet[numbullet].state) {
-        sound[4].setVolume(20); 
+        sound[4].setVolume(40); 
         sound[4].play();
         bullet[numbullet].state = true;
         bullet[numbullet].pos(player.body.getPosition().x, player.body.getPosition().y,player.dir_bullet);
