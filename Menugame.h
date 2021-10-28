@@ -5,6 +5,8 @@
 #include"Game.h"
 #include"Background.h"
 #include"Howtoplay.h"
+#include"Score.h"
+#include<string.h>
 class Menugame
 {
 public: 
@@ -24,5 +26,7 @@ private:
 	sf::Clock clock[2];
 	Game game;
 	Howtoplay howto;
+	Score scoreboard;
+	std::string name;
 };
 

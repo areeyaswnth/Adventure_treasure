@@ -78,6 +78,8 @@ void Menugame::update(sf::RenderWindow& window)
 	}
 	if (Highscore.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)&& sf::Mouse::isButtonPressed(sf::Mouse::Left)&&menu_state) {
 		clicksound.play();
+		menu_state = false;
+		highscore_state = true;
 		Highscore.setFillColor(sf::Color(255, 255, 255, 0));
 	}
 	else if (Highscore.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && menu_state) {
@@ -126,6 +128,11 @@ void Menugame::Draw(sf::RenderWindow& window)
 			menu_state = true;
 
 		}
+
+	}
+	if (highscore_state && !menu_state) {
+		backgrounds.Draw(window);
+		scoreboard.ReadFile();
 
 	}
 
