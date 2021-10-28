@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include<algorithm>
 class Score
 {
 public:
