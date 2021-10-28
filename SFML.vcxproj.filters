@@ -27,9 +27,6 @@
     <ClCompile Include="Chest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Monsters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Chest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Monsters.h">
