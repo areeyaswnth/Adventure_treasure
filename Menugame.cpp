@@ -121,6 +121,7 @@ void Menugame::Draw(sf::RenderWindow& window)
 		backgrounds.Draw(window);
 		howto.Draw(window);
 		if (howto.Exit(window)) {
+			clicksound.play();
 			howto_state = false;
 			menu_state = true;
 
