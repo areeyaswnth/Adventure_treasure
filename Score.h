@@ -13,7 +13,7 @@ public:
 	Score();
 	~Score();
 	void ReadFile();
-	void WriteFile();
+	void wFile();
 
 private:
 	FILE* fp;

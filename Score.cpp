@@ -12,14 +12,14 @@ Score::Score()
 		fscanf(fp, "%s", &temp);
 		name[i] = temp;
 		fscanf(fp, "%d", &score[i]);
-		cout << name[i] << " " << score[i] << endl;
+//		cout << name[i] << " " << score[i] << endl;
 		this->userScore.push_back(make_pair(score[i], name[i]));
 	}
 	fclose(fp);
 	sort(userScore.begin(),userScore.end());
 	for (size_t i = 0; i < 5; i++)
 	{
-		cout <<userScore[i].second<<" "<< userScore[i].first<<endl;
+	//	cout <<userScore[i].second<<" "<< userScore[i].first<<endl;
 	}	
 }
 
@@ -30,4 +30,8 @@ Score::~Score()
 void Score::ReadFile()
 {
 
+}
+
+void Score::wFile()
+{
 }

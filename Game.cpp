@@ -1,6 +1,8 @@
 #include "Game.h"
 #include<sstream>
 #include<string.h>
+using namespace sf;
+using namespace std;
 Game::Game()
 {
     //sound
@@ -208,10 +210,11 @@ void Game::collision5(int i)
 
 bool Game::over()
 {
+
     gameover.setString("GAME OVER");
     gameover.setCharacterSize(100);    
     gameover.setOrigin(gameover.getGlobalBounds().width/2, gameover.getGlobalBounds().height/2);
-    gameover.setPosition(540, 360);        
+    gameover.setPosition(540, 360);         
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)&&player.HP<=0) {
         return true;
     }
@@ -226,6 +229,15 @@ void Game::reset()
     player.HP = 100;
     player.score = 0;
     countover = 0;
+}
+
+void Game::playername()
+{
+    if (event.type==sf::Event::TextEntered)
+    {
+        username.push_back(event.text.unicode);
+        cout <<event.text.unicode;
+    }
 }
 
 
@@ -284,10 +296,11 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
             player.HP = 0;
         }
     }
-    else
+    else if(player.HP<=0)
     {
-
+        playername();
         over();
+
         if (sound[5].getStatus()!= sf::Music::Status::Playing&&countover!=1) {
             sound[5].play();
             countover=1;

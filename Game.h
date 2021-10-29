@@ -8,6 +8,8 @@
 #include"Bullet.h"
 #include "Item.h"
 #include "Bullet.h"
+#include<string.h>
+
 
 class Game
 {
@@ -17,7 +19,9 @@ public:
 	void gamedraw(sf::RenderWindow& window,float time);
 	bool state;	
 	bool over();
-	void reset();
+	void reset();	
+	void playername();
+	std::string username;
 private:	
 	sf::SoundBuffer buffer[6];
 	sf::Sound sound[6];
@@ -30,7 +34,6 @@ private:
 	void HPupdate();
 	void pewbullet();
 	void collision5(int i);
-
 	int numbullet;
 	sf::Clock clock,colorclock,clockitem[2],clockbullet,skillclock[2];
 	float counttime,colortime,itemtime[2],timebullet,skilltime[2];
@@ -45,5 +48,6 @@ private:
 	float HPsize_y;
 	int skills[2];
 	int countover;
+
 };
 

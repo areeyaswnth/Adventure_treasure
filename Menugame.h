@@ -7,6 +7,8 @@
 #include"Howtoplay.h"
 #include"Score.h"
 #include<string.h>
+#include"Gui.h"
+
 class Menugame
 {
 public: 
@@ -28,5 +30,6 @@ private:
 	Howtoplay howto;
 	Score scoreboard;
 	std::string name;
+	gui::Textbox namep;
 };
 
