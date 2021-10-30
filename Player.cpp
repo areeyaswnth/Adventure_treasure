@@ -7,7 +7,7 @@ Player::Player()
 	row = 0;
 	faceRight = true;
 	body.setSize(sf::Vector2f(51.0f, 99.0f));
-	body.setPosition(100.0f, 300.0f);
+	body.setPosition(540.0f, 50.0f);
 	body.setTexture(&player_texture);
 	body_xsize = player_texture.getSize().x / 3;
 	body_ysize = player_texture.getSize().y / 4;

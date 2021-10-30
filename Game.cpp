@@ -271,15 +271,16 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         }
 
         //bullet
-        for (int i = 0; i < 3; i++) {
-            if (bullet[i].state)bullet[i].Draw(window);
-        }
+
         if (itemtime[0] > 5) {
             if (!item[0].state) {
                 item[0].randitem();
                 item[0].state = true;
             }
             item[0].Draw(window);
+        }       
+        for (int i = 0; i < 3; i++) {
+            if (bullet[i].state)bullet[i].Draw(window);
         }
         collision5(0);
         player.Update(time);

@@ -23,7 +23,7 @@ RenderWindow window(sf::VideoMode(1080, 720), "Game");
 int main()
 {
 
-    bool namestate =true;
+    bool namestate =false;
     srand((int)time(0));
     themesong song;
     Menugame menu;
@@ -31,8 +31,10 @@ int main()
     while (window.isOpen())
     {
         Event event;
+        if (!menu.menu_state && !menu.game_state&&!menu.namestate)namestate = true;
         while (window.pollEvent(event))
         {
+           
            if (namestate) {
                 if (event.type == sf::Event::TextEntered) {
                 username.push_back(event.text.unicode);
@@ -60,6 +62,8 @@ int main()
             }            
             if (Keyboard::isKeyPressed(Keyboard::Enter)) {
                 menu.getname(user_name);
+                menu.namestate = true;
+                menu.game_state = true;
                 namestate = false;
             }
 
@@ -74,9 +78,10 @@ int main()
             draw_username();
         }
         if (!namestate) {
-            song.Play();
+
             menu.Draw(window);
-        }
+        }            
+            song.Play();
             window.display();
             window.clear();
     }

@@ -6,6 +6,16 @@ Score::Score()
 {
 
 
+
+
+}
+
+Score::~Score()
+{
+}
+
+void Score::ReadFile()
+{
 	fp = fopen("./score.txt", "r");
 	for (int i = 0; i < 5; i++)
 	{
@@ -15,22 +25,31 @@ Score::Score()
 //		cout << name[i] << " " << score[i] << endl;
 		this->userScore.push_back(make_pair(score[i], name[i]));
 	}
-	fclose(fp);
-	sort(userScore.begin(),userScore.end());
-	for (size_t i = 0; i < 5; i++)
-	{
-	//	cout <<userScore[i].second<<" "<< userScore[i].first<<endl;
-	}	
-}
-
-Score::~Score()
-{
-}
-
-void Score::ReadFile()
-{
+	
 }
 
 void Score::wFile()
 {
+	ReadFile();
+	this->name[5] = Pname;
+	this->score[5] = scoreplayer;	
+	this->userScore.push_back(make_pair(this->score[5], this->name[5]));	
+	sort(userScore.begin(),userScore.end());
+	fp=fopen("./score.txt", "w");
+	for (int i = 5; i >0; i--)
+	{
+
+		strcpy(temp, userScore[i].second.c_str());		
+	
+		fprintf(fp, "%s %d\n", temp, userScore[i].first);
+	}
+	for ( int i = 5; i >0;  i--)
+	{
+		cout <<userScore[i].second<<" "<< userScore[i].first<<endl;	
+	}
+	for (int i = 0; i < 6; i++)
+	{
+		userScore.pop_back();
+	}
+	fclose(this->fp);
 }

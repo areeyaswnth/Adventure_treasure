@@ -38,6 +38,7 @@ Menugame::Menugame()
 	menu_state = true;
 	game_state = false;
 	howto_state = false;
+	namestate = false;
 	highscore_state = false;
 	buffer.loadFromFile("sound/click.wav");
 	clicksound.setBuffer(buffer);
@@ -56,7 +57,7 @@ void Menugame::update(sf::RenderWindow& window)
 		clicksound.play();
 		play.setFillColor(sf::Color(255, 255, 255, 0));	
 		menu_state = false;	
-		game_state = true;
+		//game_state = true;
 	}
 	else if (play.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)&&menu_state) {
 		play.setFillColor(sf::Color(255, 255, 255, 100));
@@ -107,7 +108,7 @@ void Menugame::Draw(sf::RenderWindow& window)
 	window.draw(play);
 	window.draw(Name);	
 	}
-	if (game_state && !menu_state) {
+	if (game_state && !menu_state &&namestate) {
 		deltaTime = clock[0].getElapsedTime().asMilliseconds();
 		if (deltaTime > 15) {
 			clock[0].restart();
@@ -118,8 +119,10 @@ void Menugame::Draw(sf::RenderWindow& window)
 		game.gamedraw(window, deltaTime);
 		if (game.over()) {
 		cout << scoreboard.scoreplayer << " " << scoreboard.Pname;
+		scoreboard.wFile();
 			game.reset();
 			game_state = false;
+			namestate = false;
 			menu_state = true;
 		}
 	}

@@ -17,11 +17,12 @@ public:
 	~Menugame();
 	void update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
-	void getname(string name);
+	void getname(string name);	
+	bool menu_state, game_state, howto_state, highscore_state,namestate;
 private:
 	sf::SoundBuffer buffer;
 	sf::Sound clicksound;
-	bool menu_state, game_state, howto_state, highscore_state;
+
 	sf::Text play,Highscore,Howto,Name,ary;
 	sf::Font font,misname;
 	float deltaTime = 0.0f;
