@@ -29,7 +29,6 @@ Score::~Score()
 
 void Score::ReadFile()
 {
-
 }
 
 void Score::wFile()

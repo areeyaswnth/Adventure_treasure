@@ -13,11 +13,12 @@ public:
 	void chestset();
 	void Draw(sf::RenderWindow& window);
 	bool Exit(sf::RenderWindow& window);
+	sf::Text exit;
 private:
 	//sf::SoundBuffer buffer;
 	//sf::Sound clicksound;
 	sf::Font font;
-	sf::Text main,exit,keytext;
+	sf::Text main,keytext;
 	struct fortext
 	{
 		sf::Texture texture;

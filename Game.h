@@ -10,7 +10,6 @@
 #include "Bullet.h"
 #include<string.h>
 
-
 class Game
 {
 public: 
@@ -22,7 +21,9 @@ public:
 	void reset();	
 	void playername();
 	std::string username;
+	int scorep;
 private:	
+	sf::Event event;
 	sf::SoundBuffer buffer[6];
 	sf::Sound sound[6];
 	sf::Font font;
@@ -48,6 +49,5 @@ private:
 	float HPsize_y;
 	int skills[2];
 	int countover;
-
 };
 

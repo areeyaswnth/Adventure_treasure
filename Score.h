@@ -14,7 +14,8 @@ public:
 	~Score();
 	void ReadFile();
 	void wFile();
-
+	string Pname;	
+	int scoreplayer;
 private:
 	FILE* fp;
 	sf::Font font;

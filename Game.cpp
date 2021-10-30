@@ -210,7 +210,6 @@ void Game::collision5(int i)
 
 bool Game::over()
 {
-
     gameover.setString("GAME OVER");
     gameover.setCharacterSize(100);    
     gameover.setOrigin(gameover.getGlobalBounds().width/2, gameover.getGlobalBounds().height/2);
@@ -298,6 +297,7 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
     }
     else if(player.HP<=0)
     {
+        scorep = player.score;
         playername();
         over();
 

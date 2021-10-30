@@ -24,7 +24,7 @@
     <ProjectGuid>{82b23ae4-5129-457d-a302-66c8785c48e6}</ProjectGuid>
     <RootNamespace>SFML</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>SFMLtemp</ProjectName>
+    <ProjectName>adventure_treasure</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -7,7 +7,9 @@
 #include"Howtoplay.h"
 #include"Score.h"
 #include<string.h>
-
+#include"Gui.h"
+#include<vector>
+#include <windows.h>
 class Menugame
 {
 public: 
@@ -15,7 +17,7 @@ public:
 	~Menugame();
 	void update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
-	void mouseclick(sf::RenderWindow& window);
+	void getname(string name);
 private:
 	sf::SoundBuffer buffer;
 	sf::Sound clicksound;
@@ -29,6 +31,10 @@ private:
 	Howtoplay howto;
 	Score scoreboard;
 	std::string name;
-	gui::Textbox namep;
+	string user_name;
+	sf::Text US_name;
+	sf::Event event;
+	int stage;
+
 };
 

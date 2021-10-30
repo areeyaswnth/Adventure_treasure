@@ -1,4 +1,5 @@
 #include "Menugame.h"
+
 Menugame::Menugame()
 {
 	
@@ -41,6 +42,7 @@ Menugame::Menugame()
 	buffer.loadFromFile("sound/click.wav");
 	clicksound.setBuffer(buffer);
 	clicksound.setVolume(20);
+	US_name.setFont(font);
 }
 
 Menugame::~Menugame()
@@ -91,12 +93,11 @@ void Menugame::update(sf::RenderWindow& window)
 	}
 }
 
-void Menugame::mouseclick(sf::RenderWindow& window)
-{
 
-}
+
 void Menugame::Draw(sf::RenderWindow& window)
 {
+	
 	if (menu_state) {
 	update(window);
 	backgrounds.Draw(window);
@@ -104,16 +105,19 @@ void Menugame::Draw(sf::RenderWindow& window)
 	window.draw(Howto);
 	window.draw(Highscore);
 	window.draw(play);
-	window.draw(Name);
+	window.draw(Name);	
 	}
 	if (game_state && !menu_state) {
 		deltaTime = clock[0].getElapsedTime().asMilliseconds();
 		if (deltaTime > 15) {
 			clock[0].restart();
-		}
+		}			
+		scoreboard.scoreplayer=game.scorep  ;
+
 		backgrounds.Draw(window);
 		game.gamedraw(window, deltaTime);
 		if (game.over()) {
+		cout << scoreboard.scoreplayer << " " << scoreboard.Pname;
 			game.reset();
 			game_state = false;
 			menu_state = true;
@@ -131,10 +135,20 @@ void Menugame::Draw(sf::RenderWindow& window)
 
 	}
 	if (highscore_state && !menu_state) {
-		backgrounds.Draw(window);
+		backgrounds.Draw(window);		
+		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			highscore_state = false;
+			menu_state = true;
+		}*/
 		scoreboard.ReadFile();
 
-	}
+	}		
 
+	
+}
+
+void Menugame::getname(string name)
+{
+	scoreboard.Pname = name;
 }
 
