@@ -80,6 +80,11 @@ void Score::Drawscore(sf::RenderWindow& window)
 		scoretext[i].setOrigin(sf::Vector2f(scoretext[i].getGlobalBounds().width / 2, 0));
 		window.draw(scoretext[i]);
 	}
+	while (!userScore.empty())
+	{
+		userScore.pop_back();
+	}
+
 	window.draw(main);
 	
 }

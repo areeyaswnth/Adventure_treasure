@@ -1,5 +1,5 @@
-miss 1160
-miss 780
-miss 700
-misss 300
-ggg2 220
+miss 390
+mi 200
+miss 100
+??? 0
+??? 0
