@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Menugame.h"
 
 Menugame::Menugame()
@@ -99,7 +100,7 @@ void Menugame::update(sf::RenderWindow& window)
 void Menugame::Draw(sf::RenderWindow& window)
 {
 	
-	if (menu_state) {
+	if (menu_state&&!highscore_state&&!game_state&&!howto_state) {
 	update(window);
 	backgrounds.Draw(window);
 	window.draw(ary);
@@ -139,11 +140,14 @@ void Menugame::Draw(sf::RenderWindow& window)
 	}
 	if (highscore_state && !menu_state) {
 		backgrounds.Draw(window);		
-		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+		scoreboard.Drawscore(window);
+		window.draw(howto.exit);
+		if (howto.Exit(window)) {
+			clicksound.play();
 			highscore_state = false;
-			menu_state = true;
-		}*/
-		scoreboard.ReadFile();
+			menu_state = true;		
+		}
+
 
 	}		
 

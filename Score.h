@@ -5,7 +5,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include<algorithm>
-#include<utility>
+#include<sstream>
 using namespace std;
 class Score
 {
@@ -16,9 +16,12 @@ public:
 	void wFile();
 	string Pname;	
 	int scoreplayer;
+	void setscoretext();
+	void Drawscore(sf::RenderWindow& window);
 private:
-	FILE* fp;
 	sf::Font font;
+	sf::Text main,scoretext[5];
+	FILE* fp;
 	sf::Text top[5];
 	int i;
 	char temp[255];

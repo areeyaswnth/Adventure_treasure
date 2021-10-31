@@ -31,7 +31,9 @@ int main()
     while (window.isOpen())
     {
         Event event;
-        if (!menu.menu_state && !menu.game_state&&!menu.namestate)namestate = true;
+        if (!menu.menu_state && !menu.game_state && !menu.namestate && !menu.highscore_state && !menu.howto_state) {
+            namestate = true;
+        }
         while (window.pollEvent(event))
         {
            

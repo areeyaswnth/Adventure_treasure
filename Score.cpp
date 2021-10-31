@@ -4,10 +4,21 @@
 using namespace std;
 Score::Score()
 {
+	font.loadFromFile("font/8Bit.ttf");
+	sf::Text ttext("ScoreBoard", font,80);	
+	main = ttext;
+	main.setFillColor(sf::Color::White);
+	main.setOrigin(sf::Vector2f(main.getGlobalBounds().width / 2, 0));
+	main.setPosition(sf::Vector2f(540, 50));
+	for (int i = 0; i < 5; i++)
+	{
+		scoretext[i].setCharacterSize(40);
+		scoretext[i].setFillColor(sf::Color::White);
+		scoretext[i].setPosition(540, 200+(i*80));
+	//	
+		scoretext[i].setFont(font);
 
-
-
-
+	}
 }
 
 Score::~Score()
@@ -40,7 +51,6 @@ void Score::wFile()
 	{
 
 		strcpy(temp, userScore[i].second.c_str());		
-	
 		fprintf(fp, "%s %d\n", temp, userScore[i].first);
 	}
 	for ( int i = 5; i >0;  i--)
@@ -53,3 +63,24 @@ void Score::wFile()
 	}
 	fclose(this->fp);
 }
+
+void Score::setscoretext()
+{
+}
+
+void Score::Drawscore(sf::RenderWindow& window)
+{
+
+	stringstream ss[5];
+	ReadFile();
+	fclose(this->fp);
+	for (int i = 0; i < 5; i++) {
+		ss[i] << userScore[i].second << "       " << userScore[i].first;
+		scoretext[i].setString(ss[i].str());
+		scoretext[i].setOrigin(sf::Vector2f(scoretext[i].getGlobalBounds().width / 2, 0));
+		window.draw(scoretext[i]);
+	}
+	window.draw(main);
+	
+}
+

@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Game.h"
 #include<sstream>
 #include<string.h>
