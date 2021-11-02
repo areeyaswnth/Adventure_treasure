@@ -19,14 +19,14 @@ vector<char> username;
 string user_name = "";    
 Background bg;
 RenderWindow window(sf::VideoMode(1080, 720), "Game");
-  
+    Menugame menu;  
 int main()
 {
 
     bool namestate =false;
     srand((int)time(0));
     themesong song;
-    Menugame menu;
+
     // game.state = true;
     while (window.isOpen())
     {
@@ -63,6 +63,7 @@ int main()
                 username.pop_back();
             }            
             if (Keyboard::isKeyPressed(Keyboard::Enter)) {
+                menu.clicksound.play();
                 menu.getname(user_name);
                 menu.namestate = true;
                 menu.game_state = true;
@@ -110,7 +111,7 @@ void draw_username()
     }
     else
     {
-
+        //menu.clicksound.play();
         US_name.setString(user_name);
         US_name.setFillColor(sf::Color::White);
     }

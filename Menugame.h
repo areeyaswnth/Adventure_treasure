@@ -18,10 +18,11 @@ public:
 	void update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 	void getname(string name);	
-	bool menu_state, game_state, howto_state, highscore_state,namestate;
+	bool menu_state, game_state, howto_state, highscore_state,namestate;	
+	sf::Sound clicksound;
 private:
 	sf::SoundBuffer buffer;
-	sf::Sound clicksound;
+
 
 	sf::Text play,Highscore,Howto,Name,ary;
 	sf::Font font,misname;

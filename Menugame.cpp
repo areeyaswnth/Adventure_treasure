@@ -110,13 +110,13 @@ void Menugame::Draw(sf::RenderWindow& window)
 	window.draw(Name);	
 	}
 	if (game_state && !menu_state &&namestate) {
+	
 		deltaTime = clock[0].getElapsedTime().asMilliseconds();
 		if (deltaTime > 15) {
 			clock[0].restart();
 		}			
 		scoreboard.scoreplayer=game.scorep  ;
-
-		backgrounds.Draw(window);
+		backgrounds.Draw(window);	
 		game.gamedraw(window, deltaTime);
 		if (game.over()) {
 		cout << scoreboard.scoreplayer << " " << scoreboard.Pname;
