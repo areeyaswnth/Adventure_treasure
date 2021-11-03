@@ -172,7 +172,7 @@ void Game::collision1(int i)
         chest[i].open = false;
         chest[i].coin.state = false;
         chest[i].monster.state = false;
-        chest[i].randchest();
+        chest[i].set();
         chest_count++;
         level_update();
         player.score += (100*player.scorebonus);        
@@ -355,6 +355,10 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         counttime = clock.getElapsedTime().asMilliseconds();
      //monster-chest
         for (int i = 0; i < chestmax ; i++) {
+            if (!chest[i].cheststate) {
+                chest[i].set();
+                chest[i].cheststate = true;
+            }
             collision1(i);
             for (int j = 0; j < 3; j++)
             {

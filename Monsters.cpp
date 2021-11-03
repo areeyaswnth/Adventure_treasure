@@ -17,7 +17,6 @@ Monsters::Monsters()
 	body.setSize(sf::Vector2f(55.2f, 62.4f));
 	pos_x = body.getPosition().x;
 	pos_y = body.getPosition().y;
-	set();
 	cout << randtype<<endl;
 //	speed = 0.05f;
 }
@@ -41,7 +40,7 @@ void Monsters::update()
 		dirx = +1;
 	}
 	}
-	if ((level >=3&&(randtype==2))&&(level>=8&&(randtype==3))) {
+	if ((level >=3&&(randtype==2))||(level>=8&&(randtype==3))) {
 	if (diry == 1) body.move(0, speed);
 	else if (diry == 2)  body.move(0, -speed);
 	if (body.getPosition().y > (pos_y + step) || body.getPosition().y > 720) {
@@ -72,9 +71,10 @@ void Monsters::Draw(sf::RenderWindow& window)
 	}
 	else
 	{
-	//	state = false;
-		HP = 100;
+	//	state = false;		
 		set();
+		HP = 100;
+
 	}
 }
 

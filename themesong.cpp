@@ -4,7 +4,7 @@ themesong::themesong()
 {
 	buffer.loadFromFile("sound/demo.wav");
 	sound.setBuffer(buffer);
-	sound.setVolume(3);
+	sound.setVolume(1);
 }
 
 themesong::~themesong()
@@ -14,6 +14,6 @@ themesong::~themesong()
 void themesong::Play()
 {
 	if (sound.getStatus() != sf::Music::Status::Playing) {
-	//	sound.play();
+		sound.play();
 	}
 }

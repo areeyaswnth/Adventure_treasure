@@ -10,6 +10,7 @@ public:
 	void Draw(sf::RenderWindow& window,float time);
 	void randchest();
 	void monster_move();	
+	void set();
 	struct MyStruct1
 	{
 		bool state;
@@ -32,6 +33,7 @@ public:
 	int box_xsize;
 	int box_ysize;
 	int level;
+	bool cheststate;
 private:
 	sf::SoundBuffer buffer;
 	sf::Sound sound;

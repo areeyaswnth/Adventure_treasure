@@ -30,11 +30,9 @@ Chest::Chest()
 	monster.shape.setTextureRect(sf::IntRect(0, 0, box_xsize, box_ysize));
 	monster.shape.setTexture(&monster.texture);
 	monster.shape.setSize(sf::Vector2f(55.2f, 62.4f));
-	monster.speed = randrange(3, 5) * 0.01;
-	monster.state = false;
-	randchest();
 	//
 	open = false;
+	cheststate = false;
 }
 
 Chest::~Chest()
@@ -51,6 +49,39 @@ void Chest::Update(sf::FloatRect p1)
 		sound.play();
 		sound.setVolume(10);
 	}
+}
+void Chest::monster_move() {
+		if (dir == 1) monster.shape.move(monster.speed, 0);
+		else monster.shape.move(-monster.speed, 0);
+		if(monster.shape.getPosition().x>box.getPosition().x+60){
+			dir =-1;	 
+		}
+		if (monster.shape.getPosition().x <box.getPosition().x - 60) {
+			dir = +1;
+		}
+}
+
+void Chest::set()
+{
+	monster.speed = randrange(3, 5) * 0.01;
+	monster.state = false;
+	randchest();
+}
+
+void Chest::randchest()
+{	
+	box.setPosition(randrange(55,1025 ), randrange(200, 680));
+	coin.shape.setPosition(box.getPosition().x,box.getPosition().y);
+	monster.shape.setPosition(box.getPosition().x+60, box.getPosition().y);
+	int random = randrange(1, 3);
+	if (level >= 4) {
+		if (random ==1) {
+		monster.state =true ;
+		monster.HP = 50;
+		}
+	}
+
+
 }
 
 void Chest::Draw(sf::RenderWindow& window,float time)
@@ -78,31 +109,3 @@ void Chest::Draw(sf::RenderWindow& window,float time)
 		if (coin.animation >= 4) coin.animation=0;
 		coin.shape.setTextureRect(sf::IntRect(box_xsize*coin.animation, 0, box_xsize, box_ysize));
 }
-void Chest::monster_move() {
-		if (dir == 1) monster.shape.move(monster.speed, 0);
-		else monster.shape.move(-monster.speed, 0);
-		if(monster.shape.getPosition().x>box.getPosition().x+60){
-			dir =-1;	 
-		}
-		if (monster.shape.getPosition().x <box.getPosition().x - 60) {
-			dir = +1;
-		}
-}
-
-void Chest::randchest()
-{	
-	box.setPosition(randrange(55,1025 ), randrange(200, 680));
-	coin.shape.setPosition(box.getPosition().x,box.getPosition().y);
-	monster.shape.setPosition(box.getPosition().x+60, box.getPosition().y);
-	int random = randrange(1, 3);
-	if (level >= 4) {
-		if (random ==1) {
-		monster.state =true ;
-		monster.HP = 50;
-		}
-	}
-
-
-}
-
-
