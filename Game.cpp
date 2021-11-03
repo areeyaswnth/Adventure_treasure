@@ -367,11 +367,16 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
     //monster-shape
         for (int i = 0; i < monstermax; i++)
         {
+            if (!monster[i].monstate) {
+                monster[i].set();
+                monster[i].monstate= true;
+            }
             collision2(i);
             for (int j = 0; j < 3; j++)
             {
                 collision4(i, j);
             }
+            monster[i].level = level;
             monster[i].update();
             monster[i].Draw(window);
 

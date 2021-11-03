@@ -9,20 +9,17 @@ float randrangemonster(int start, int stop) {
 
 Monsters::Monsters()
 {
+	monstate = false;
 	HP = 100;
 	texture.loadFromFile("graphics/monster1.png");
 	body.setTextureRect(sf::IntRect(0, 0, 23.0f, 26.0f));
 	body.setTexture(&texture);
 	body.setSize(sf::Vector2f(55.2f, 62.4f));
-	body.setPosition(randrangemonster(55, 1025), randrangemonster(200,680));
 	pos_x = body.getPosition().x;
 	pos_y = body.getPosition().y;
+	set();
+	cout << randtype<<endl;
 //	speed = 0.05f;
-	speed= randrangemonster(2, 8) * 0.01;
-	step = randrangemonster(100, 350);
-	dirx = randrangemonster(1,2);
-	diry = 0;
-//	diry = randrangemonster(1, 2);
 }
 
 Monsters::~Monsters()
@@ -33,6 +30,7 @@ Monsters::~Monsters()
 
 void Monsters::update()
 {	
+	if ((level >= 3 && (randtype == 3 || randtype == 1)) || (level < 3)) {
 	if (dirx == 1) body.move(speed, 0);
 	else if(dirx==2)  body.move(-speed, 0);
 	else if (dirx == 2)  body.move(-speed, 0);
@@ -42,16 +40,29 @@ void Monsters::update()
 	else if (body.getPosition().x <( pos_x - step) || body.getPosition().x < 0) {
 		dirx = +1;
 	}
-	/*if (diry == 1) body.move(0, speed);
+	}
+	if ((level >=3&&(randtype==2))&&(level>=8&&(randtype==3))) {
+	if (diry == 1) body.move(0, speed);
 	else if (diry == 2)  body.move(0, -speed);
 	if (body.getPosition().y > (pos_y + step) || body.getPosition().y > 720) {
 		diry = +2;
 	}
 	else if (body.getPosition().y < (pos_y - step) || body.getPosition().y < 0) {
 		diry = +1;
-	}*/
+	}
+	}
+
 }
 
+void Monsters::set()
+{
+	speed = randrangemonster(2, 6) * 0.01;
+	step = randrangemonster(100, 350);
+	dirx = randrangemonster(1, 2);
+	diry = randrangemonster(1, 2);
+	randtype = randrangemonster(1, 3);
+	body.setPosition(randrangemonster(55, 1025), randrangemonster(200, 680));
+}
 void Monsters::Draw(sf::RenderWindow& window)
 {
 	
@@ -63,6 +74,7 @@ void Monsters::Draw(sf::RenderWindow& window)
 	{
 	//	state = false;
 		HP = 100;
-		body.setPosition(randrangemonster(55, 1025), randrangemonster(200, 680));
+		set();
 	}
 }
+
