@@ -58,10 +58,7 @@ Game::~Game()
 
 void Game::level_update()
 {
-    std::stringstream ss;
-    ss <<"Level :"<<level;
-    std::string str = ss.str();
-    Level.setString(ss.str());
+
      if(chest_count>=50)
     {
         if (chest_count == 50)sound[6].play();
@@ -387,6 +384,10 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         scoreupdate();        
         window.draw(textscore);
         window.draw(score);
+        std::stringstream ss;
+        ss << "Level :" << level;
+        std::string str = ss.str();
+        Level.setString(ss.str());        
         window.draw(Level);
         state = true;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {

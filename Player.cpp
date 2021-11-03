@@ -17,6 +17,7 @@ Player::Player()
 	dir_bullet = 4;
 	HP = max_HP;
 	score = 0;
+
 }
 
 Player::~Player()
@@ -24,7 +25,7 @@ Player::~Player()
 }
 
 void Player::Update(float deltatime)
-{	
+{		pTime = pClock.getElapsedTime().asMilliseconds();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)&&deltatime>15 &&body.getPosition().x>0) {
 		body.setTextureRect(sf::IntRect(body_xsize*animationFrame, body_ysize * 2, body_xsize, body_ysize));
 		body.move(-2.f, 0.f);
@@ -51,7 +52,11 @@ void Player::Update(float deltatime)
 		animationFrame++;
 		dir_bullet = 4;
 	}
+	if (pTime> 1000) {
 	animationFrame++;
+	pClock.restart();
+	}
+
 	if (animationFrame >=3) {
 		animationFrame = 0;
 	}		

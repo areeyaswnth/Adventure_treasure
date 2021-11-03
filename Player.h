@@ -14,6 +14,8 @@ public:
 	float scorebonus;
 	int dir_bullet;
 private:
+	sf::Clock pClock;
+	double pTime;
 	sf::Texture bullettexture;
 	sf::Texture player_texture;
 	unsigned int row;
