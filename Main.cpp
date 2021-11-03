@@ -60,7 +60,7 @@ int main()
             {
                 username.pop_back();
             }            
-            if (Keyboard::isKeyPressed(Keyboard::Enter)) {
+            if (Keyboard::isKeyPressed(Keyboard::Enter)&& username.size()!=0) {
                 menu.clicksound.play();
                 menu.getname(user_name);
                 menu.namestate = true;

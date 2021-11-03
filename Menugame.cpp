@@ -111,7 +111,7 @@ void Menugame::Draw(sf::RenderWindow& window)
 	if (game_state && !menu_state &&namestate) {
 	
 		deltaTime = clock[0].getElapsedTime().asMilliseconds();
-		if (deltaTime > 15) {
+		if (deltaTime >20) {
 			clock[0].restart();
 		}			
 		scoreboard.scoreplayer=game.scorep  ;

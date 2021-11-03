@@ -38,6 +38,7 @@ private:
 	void HPupdate();
 	void pewbullet();
 	void collision5(int i);
+	void leveluptext();
 	int numbullet;
 	sf::Clock clock,colorclock,clockitem[2],clockbullet,skillclock[2];
 	float counttime,colortime,itemtime[2],timebullet,skilltime[2];

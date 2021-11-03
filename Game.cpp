@@ -30,6 +30,7 @@ Game::Game()
     textscore = ttext;
     score = ttext;
     gameover = ttext;
+    Level.setString("LEVEL : 0");
     score.setString("0000000");
     HPsize_x = 500.0f;
     HPsize_y = 40.0f;
@@ -122,9 +123,9 @@ void Game::level_update()
         chestmax = 3;
         level = 2;
     }
-    else if (chest_count >= 3)
+    else if (chest_count >= 2)
     {
-        if(chest_count==3)sound[6].play();
+        if(chest_count==2)sound[6].play();
         monstermax = 1;
         chestmax = 2;
         level = 1;
@@ -135,11 +136,13 @@ void Game::level_update()
          chestmax = 1;
          level = 0;
      }
+     leveluptext();
+     cout << level << endl;
 }
 
 void Game::scoreupdate()
 {
-    std::stringstream ss;
+    stringstream ss;
     ss << player.score;
     std::string str = ss.str();
     while (str.length() < 6) {
@@ -149,6 +152,7 @@ void Game::scoreupdate()
     textscore.setPosition(940,0);
     score.setCharacterSize(90);
     score.setPosition(830, 30);
+
 }
 
 void Game::collision1(int i)
@@ -172,7 +176,6 @@ void Game::collision1(int i)
         chest_count++;
         level_update();
         player.score += (100*player.scorebonus);        
-        cout << level<<endl;
     }
 
 }
@@ -299,6 +302,14 @@ void Game::collision5(int i)
     }
 }
 
+void Game::leveluptext()
+{
+    std::stringstream ss;
+    ss << "Level :" << level;
+    std::string str = ss.str();
+    Level.setString(str);
+}
+
 bool Game::over()
 {
     gameover.setString("GAME OVER");
@@ -321,6 +332,7 @@ void Game::reset()
     player.HP = 100;
     player.score = 0;
     countover = 0;
+    level_update();
 }
 
 void Game::playername()
@@ -335,18 +347,20 @@ void Game::playername()
 
 void Game::gamedraw(sf::RenderWindow& window,float time)
 {
+
     if (player.HP>0)
     {   
         itemtime[0] = clockitem[0].getElapsedTime().asSeconds();
         pewbullet();
         counttime = clock.getElapsedTime().asMilliseconds();
-     //monster-chwst
+     //monster-chest
         for (int i = 0; i < chestmax ; i++) {
             collision1(i);
             for (int j = 0; j < 3; j++)
             {
                 collision3(i, j);
-            }
+            }    
+            chest[i].level= level;
             chest[i].Update(player.Collision());
             chest[i].Draw(window, time);
         }
@@ -364,14 +378,16 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         }
 
         //bullet
-
+        if (level >= 4) {
         if (itemtime[0] > 5) {
             if (!item[0].state) {
                 item[0].randitem();
                 item[0].state = true;
             }
             item[0].Draw(window);
-        }       
+        } 
+        }
+      
         for (int i = 0; i < 3; i++) {
             if (bullet[i].state)bullet[i].Draw(window);
         }
@@ -384,10 +400,6 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         scoreupdate();        
         window.draw(textscore);
         window.draw(score);
-        std::stringstream ss;
-        ss << "Level :" << level;
-        std::string str = ss.str();
-        Level.setString(ss.str());        
         window.draw(Level);
         state = true;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {

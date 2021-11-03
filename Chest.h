@@ -27,10 +27,11 @@ public:
 		
 
 	}monster;	
-	bool open;	
+	bool open;
 	sf::RectangleShape box;	
 	int box_xsize;
 	int box_ysize;
+	int level;
 private:
 	sf::SoundBuffer buffer;
 	sf::Sound sound;

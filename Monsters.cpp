@@ -35,6 +35,7 @@ void Monsters::update()
 {	
 	if (dirx == 1) body.move(speed, 0);
 	else if(dirx==2)  body.move(-speed, 0);
+	else if (dirx == 2)  body.move(-speed, 0);
 	if (body.getPosition().x > (pos_x + step)|| body.getPosition().x > 1080) {
 		dirx = +2;
 	}

@@ -90,14 +90,18 @@ void Chest::monster_move() {
 }
 
 void Chest::randchest()
-{	int random = randrange(1, 3);
+{	
 	box.setPosition(randrange(55,1025 ), randrange(200, 680));
 	coin.shape.setPosition(box.getPosition().x,box.getPosition().y);
 	monster.shape.setPosition(box.getPosition().x+60, box.getPosition().y);
-	if (random ==1) {
+	int random = randrange(1, 3);
+	if (level >= 4) {
+		if (random ==1) {
 		monster.state =true ;
 		monster.HP = 50;
+		}
 	}
+
 
 }
 
