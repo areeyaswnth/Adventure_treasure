@@ -33,7 +33,6 @@ void Score::ReadFile()
 		fscanf(fp, "%s", &temp);
 		name[i] = temp;
 		fscanf(fp, "%d", &score[i]);
-//		cout << name[i] << " " << score[i] << endl;
 		this->userScore.push_back(make_pair(score[i], name[i]));
 	}
 	

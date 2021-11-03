@@ -26,8 +26,6 @@ int main()
     bool namestate =false;
     srand((int)time(0));
     themesong song;
-
-    // game.state = true;
     while (window.isOpen())
     {
         Event event;

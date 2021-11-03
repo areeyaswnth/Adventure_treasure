@@ -20,9 +20,13 @@ Game::Game()
     buffer[5].loadFromFile("sound/over.wav");
     sound[5].setBuffer(buffer[5]);
     sound[5].setVolume(20);
+    buffer[6].loadFromFile("sound/level.wav");
+    sound[6].setBuffer(buffer[6]);
+    sound[6].setVolume(20);
     //text    
     font.loadFromFile("font/8Bit.ttf");
     sf::Text ttext("score", font, 60);
+    Level = ttext;
     textscore = ttext;
     score = ttext;
     gameover = ttext;
@@ -32,18 +36,108 @@ Game::Game()
     HP.setPosition(50, 30);
     baseHP.setPosition(45, 25);
     baseHP.setSize(sf::Vector2f(HPsize_x + 10, HPsize_y + 10));
-    baseHP.setFillColor(sf::Color::White);
+    baseHP.setFillColor(sf::Color::White);    
+    Level.setPosition(50, 60);
+    Level.setFillColor(sf::Color::White);
     numbullet = 0;
     player.scorebonus = 1.0f;
     skilltime[0] = 0;
     item[0].skillstate = false;
     int countover=0;
+    level = 0;
+    chest_count = 0;
+    monstermax = 0;
+    chestmax = 1;
 
 }
 
 Game::~Game()
 {
 
+}
+
+void Game::level_update()
+{
+    std::stringstream ss;
+    ss <<"Level :"<<level;
+    std::string str = ss.str();
+    Level.setString(ss.str());
+     if(chest_count>=50)
+    {
+        if (chest_count == 50)sound[6].play();
+        monstermax = 5;
+        chestmax = 15;
+        level = 10;
+    }
+    else if (chest_count >= 40)
+    {
+        if (chest_count == 40)sound[6].play();
+        monstermax = 4;
+        chestmax = 10;
+        level = 9;
+    }
+    else if (chest_count >= 35)
+    {
+        if (chest_count == 35)sound[6].play();
+        monstermax = 4;
+        chestmax = 9;
+        level = 8;
+    }
+    else if (chest_count >= 30)
+    {
+        if (chest_count == 30)sound[6].play();
+        monstermax = 3;
+        chestmax = 8;
+        level = 7;
+    }
+    else if (chest_count >= 25)
+    {
+        if (chest_count == 25)sound[6].play();
+        monstermax = 3;
+        chestmax = 7;
+        level = 6;
+    }
+    else if (chest_count >= 20)
+    {
+        if (chest_count == 20)sound[6].play();
+        monstermax = 3;
+        chestmax = 6;
+        level = 5;
+    }
+    else if (chest_count >= 15)
+    {
+        if (chest_count == 15)sound[6].play();
+        monstermax = 2;
+        chestmax = 5;
+        level = 4;
+    }
+    else if (chest_count >= 10)
+    {
+        if (chest_count == 10)sound[6].play();
+        monstermax = 2;
+        chestmax = 4;
+        level = 3;
+    }
+    else if (chest_count >= 5)
+    {
+        if (chest_count == 5)sound[6].play();
+        monstermax = 2;
+        chestmax = 3;
+        level = 2;
+    }
+    else if (chest_count >= 3)
+    {
+        if(chest_count==3)sound[6].play();
+        monstermax = 1;
+        chestmax = 2;
+        level = 1;
+    }
+    else if (chest_count >= 0)
+     {
+         monstermax=0;
+         chestmax = 1;
+         level = 0;
+     }
 }
 
 void Game::scoreupdate()
@@ -78,8 +172,10 @@ void Game::collision1(int i)
         chest[i].coin.state = false;
         chest[i].monster.state = false;
         chest[i].randchest();
-        player.score += (100*player.scorebonus);
-     //   std::cout << "SCORE:" << player.score << "\n";
+        chest_count++;
+        level_update();
+        player.score += (100*player.scorebonus);        
+        cout << level<<endl;
     }
 
 }
@@ -92,7 +188,6 @@ void Game::collision2(int i)
         sound[0].setVolume(20);
         sound[0].play();
         player.body.setFillColor(sf::Color(255, 0, 0, 100));
-      //  colortime = colorclock.getElapsedTime().asMilliseconds();
         clock.restart();
 
     }    
@@ -153,7 +248,6 @@ void Game::collision3(int i, int j)
             player.score += (20 * player.scorebonus);
             sound[2].setVolume(20);
             sound[2].play();
-         //   std::cout << "SCORE:" << player.score << "\n";
         }
     }
 }
@@ -169,7 +263,6 @@ void Game::collision4(int i, int j)
             sound[2].setVolume(20);
             sound[2].play();
             player.score += (30 * player.scorebonus);
-           // std::cout << "SCORE:" << player.score << "\n";
         }
     }
 }
@@ -226,6 +319,8 @@ bool Game::over()
 
 void Game::reset()
 {
+    level = 0;
+    chest_count = 0;
     player.HP = 100;
     player.score = 0;
     countover = 0;
@@ -248,8 +343,8 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         itemtime[0] = clockitem[0].getElapsedTime().asSeconds();
         pewbullet();
         counttime = clock.getElapsedTime().asMilliseconds();
-     //monster-map
-        for (int i = 0; i < 15; i++) {
+     //monster-chwst
+        for (int i = 0; i < chestmax ; i++) {
             collision1(i);
             for (int j = 0; j < 3; j++)
             {
@@ -259,7 +354,7 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
             chest[i].Draw(window, time);
         }
     //monster-shape
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < monstermax; i++)
         {
             collision2(i);
             for (int j = 0; j < 3; j++)
@@ -292,6 +387,7 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
         scoreupdate();        
         window.draw(textscore);
         window.draw(score);
+        window.draw(Level);
         state = true;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
             player.HP = 0;

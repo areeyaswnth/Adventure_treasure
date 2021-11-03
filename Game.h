@@ -23,10 +23,13 @@ public:
 	std::string username;
 	int scorep;
 private:	
+	int level;	
+	int chest_count;
 	sf::Event event;
-	sf::SoundBuffer buffer[6];
-	sf::Sound sound[6];
+	sf::SoundBuffer buffer[7];
+	sf::Sound sound[7];
 	sf::Font font;
+	void level_update();
 	void scoreupdate();
 	void collision1(int i);
 	void collision2(int i);
@@ -43,11 +46,12 @@ private:
 	Player player;
 	Item item[3];
 	Bullet bullet[3];
-	sf::Text textscore,score,gameover;
+	sf::Text textscore,score,gameover,Level;
 	sf::RectangleShape HP,baseHP;
 	float HPsize_x;
 	float HPsize_y;
 	int skills[2];
 	int countover;
+	int monstermax, chestmax;
 };
 

@@ -58,7 +58,6 @@ void Menugame::update(sf::RenderWindow& window)
 		clicksound.play();
 		play.setFillColor(sf::Color(255, 255, 255, 0));	
 		menu_state = false;	
-		//game_state = true;
 	}
 	else if (play.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)&&menu_state) {
 		play.setFillColor(sf::Color(255, 255, 255, 100));
