@@ -17,7 +17,6 @@ Monsters::Monsters()
 	body.setSize(sf::Vector2f(55.2f, 62.4f));
 	pos_x = body.getPosition().x;
 	pos_y = body.getPosition().y;
-	cout << randtype<<endl;
 //	speed = 0.05f;
 }
 
@@ -55,8 +54,8 @@ void Monsters::update()
 
 void Monsters::set()
 {
-	speed = randrangemonster(2, 6) * 0.01;
-	step = randrangemonster(100, 350);
+	speed = randrangemonster(3, 7) * 0.01;
+	step = randrangemonster(300, 500);
 	dirx = randrangemonster(1, 2);
 	diry = randrangemonster(1, 2);
 	randtype = randrangemonster(1, 3);
