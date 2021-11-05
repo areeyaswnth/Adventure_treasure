@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include<SFML/Audio.hpp>
+//#include"Specialmons.h"
 #include"Monsters.h"
 #include"Chest.h"
 #include "Player.h"
@@ -9,6 +10,7 @@
 #include "Item.h"
 #include "Bullet.h"
 #include<string.h>
+
 
 class Game
 {
@@ -46,6 +48,7 @@ private:
 	Player player;
 	Item item[3];
 	Bullet bullet[3];
+//	Specialmons spemons[2];
 	sf::Text textscore,score,gameover,Level;
 	sf::RectangleShape HP,baseHP;
 	float HPsize_x;

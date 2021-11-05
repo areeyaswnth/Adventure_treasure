@@ -378,7 +378,8 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
             monster[i].Draw(window);
 
         }
-
+      //  spemons[0].Draw(window);
+     //   spemons[1].Draw(window);
         //bullet
         if (level >= 4) {
         if (itemtime[0] > 5) {
