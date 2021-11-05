@@ -19,7 +19,6 @@ public:
 	bool state;	
 	bool over();
 	void reset();	
-	void playername();
 	std::string username;
 	int scorep;
 private:	

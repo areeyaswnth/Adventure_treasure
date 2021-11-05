@@ -12,7 +12,8 @@ public:
 	int HP;	
 	size_t score;	
 	float scorebonus;
-	int dir_bullet;
+	int dir_bullet;	
+	int animationFrame;
 private:
 	sf::Clock pClock;
 	double pTime;
@@ -23,7 +24,7 @@ private:
 	bool faceRight;
 	int body_xsize;
 	int body_ysize;
-	int animationFrame;
+
 	int max_HP=100;
 
 

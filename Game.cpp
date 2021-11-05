@@ -62,56 +62,56 @@ void Game::level_update()
 
      if(chest_count>=40)
     {
-        if (chest_count == 50)sound[6].play();
+        if (chest_count == 40)sound[6].play();
         monstermax = 5;
         chestmax = 15;
         level = 10;
     }
     else if (chest_count >= 30)
     {
-        if (chest_count == 40)sound[6].play();
+        if (chest_count == 30)sound[6].play();
         monstermax = 4;
         chestmax = 10;
         level = 9;
     }
     else if (chest_count >= 26)
     {
-        if (chest_count == 35)sound[6].play();
+        if (chest_count == 26)sound[6].play();
         monstermax = 4;
         chestmax = 9;
         level = 8;
     }
     else if (chest_count >= 24)
     {
-        if (chest_count == 30)sound[6].play();
+        if (chest_count == 24)sound[6].play();
         monstermax = 3;
         chestmax = 8;
         level = 7;
     }
     else if (chest_count >= 20)
     {
-        if (chest_count == 25)sound[6].play();
+        if (chest_count == 20)sound[6].play();
         monstermax = 3;
         chestmax = 7;
         level = 6;
     }
     else if (chest_count >= 16)
     {
-        if (chest_count == 20)sound[6].play();
+        if (chest_count == 16)sound[6].play();
         monstermax = 3;
         chestmax = 6;
         level = 5;
     }
     else if (chest_count >= 12)
     {
-        if (chest_count == 15)sound[6].play();
+        if (chest_count == 12)sound[6].play();
         monstermax = 2;
         chestmax = 5;
         level = 4;
     }
     else if (chest_count >= 8)
     {
-        if (chest_count == 10)sound[6].play();
+        if (chest_count == 8)sound[6].play();
         monstermax = 2;
         chestmax = 4;
         level = 3;
@@ -123,9 +123,9 @@ void Game::level_update()
         chestmax = 3;
         level = 2;
     }
-    else if (chest_count >= 2)
+    else if (chest_count >= 1)
     {
-        if(chest_count==2)sound[6].play();
+        if(chest_count==1)sound[6].play();
         monstermax = 1;
         chestmax = 2;
         level = 1;
@@ -137,7 +137,6 @@ void Game::level_update()
          level = 0;
      }
      leveluptext();
-     cout << level << endl;
 }
 
 void Game::scoreupdate()
@@ -333,16 +332,10 @@ void Game::reset()
     player.score = 0;
     countover = 0;
     level_update();
+    player.body.setPosition(540, 360);
+    player.animationFrame = 0;
 }
 
-void Game::playername()
-{
-    if (event.type==sf::Event::TextEntered)
-    {
-        username.push_back(event.text.unicode);
-        cout <<event.text.unicode;
-    }
-}
 
 
 void Game::gamedraw(sf::RenderWindow& window,float time)
@@ -418,7 +411,6 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
     else if(player.HP<=0)
     {
         scorep = player.score;
-        playername();
         over();
 
         if (sound[5].getStatus()!= sf::Music::Status::Playing&&countover!=1) {
