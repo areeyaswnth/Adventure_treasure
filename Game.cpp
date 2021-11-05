@@ -354,6 +354,7 @@ void Game::reset()
     player.HP = 100;
     player.score = 0;
     countover = 0;
+    spe = 0;
     level_update();
     player.body.setPosition(540, 360);
     player.animationFrame = 0;
