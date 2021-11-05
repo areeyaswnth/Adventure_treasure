@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+//#define _CRT_SECURE_NO_WARNINGS
 #include "Game.h"
 #include<sstream>
 #include<string.h>
@@ -66,32 +66,34 @@ void Game::level_update()
         monstermax = 5;
         chestmax = 15;
         level = 10;
+        spe = 2;
     }
     else if (chest_count >= 30)
     {
         if (chest_count == 30)sound[6].play();
-        monstermax = 4;
+        monstermax = 5;
         chestmax = 10;
         level = 9;
+        spe = 1;
     }
     else if (chest_count >= 26)
     {
         if (chest_count == 26)sound[6].play();
-        monstermax = 4;
+        monstermax = 5;
         chestmax = 9;
         level = 8;
     }
     else if (chest_count >= 24)
     {
         if (chest_count == 24)sound[6].play();
-        monstermax = 3;
+        monstermax = 4;
         chestmax = 8;
         level = 7;
     }
     else if (chest_count >= 20)
     {
         if (chest_count == 20)sound[6].play();
-        monstermax = 3;
+        monstermax = 4;
         chestmax = 7;
         level = 6;
     }
@@ -105,7 +107,7 @@ void Game::level_update()
     else if (chest_count >= 12)
     {
         if (chest_count == 12)sound[6].play();
-        monstermax = 2;
+        monstermax = 3;
         chestmax = 5;
         level = 4;
     }
@@ -186,14 +188,9 @@ void Game::collision2(int i)
         player.HP-=10;
         sound[0].setVolume(20);
         sound[0].play();
-        player.body.setFillColor(sf::Color(255, 0, 0, 100));
         clock.restart();
 
     }    
-    else
-    {
-        player.body.setFillColor(sf::Color(255, 255, 255, 255));
-    }
 
 }
 
@@ -301,6 +298,32 @@ void Game::collision5(int i)
     }
 }
 
+void Game::collision6(int i, int j)
+{
+    if (bullet[j].bullet_body.getGlobalBounds().intersects(spemons[i].body.getGlobalBounds()) && bullet[j].state && spemons[i].state)
+    {
+        spemons[i].HP -= 15;
+        bullet[j].state = false;
+        if (spemons[i].HP <= 0)
+        {
+            sound[2].setVolume(20);
+            sound[2].play();
+            player.score += (100 * player.scorebonus);
+        }
+    }
+}
+
+void Game::collision7(int i)
+{
+    if (player.body.getGlobalBounds().intersects(spemons[i].body.getGlobalBounds()) && counttime >= 2000 && spemons[i].state) {
+        player.HP -= 10;
+        sound[0].setVolume(20);
+        sound[0].play();
+        clock.restart();
+
+    }
+}
+
 void Game::leveluptext()
 {
     std::stringstream ss;
@@ -378,8 +401,22 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
             monster[i].Draw(window);
 
         }
-      //  spemons[0].Draw(window);
-     //   spemons[1].Draw(window);
+        //spemon
+        for (int i = 0; i < spe; i++)
+        {
+            if (!spemons[i].monstate) {
+                spemons[i].set();
+                spemons[i].monstate = true;
+            }
+            collision7(i);
+            for (int j = 0; j < 3; j++)
+            {
+                collision6(i, j);
+            }
+            spemons[i].update();
+            spemons[i].Draw(window);
+
+        }
         //bullet
         if (level >= 4) {
         if (itemtime[0] > 5) {
@@ -413,11 +450,14 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
     {
         scorep = player.score;
         over();
-
+        sf::Text press("PRESS R FOR BACK TO MENU", font, 30);
+        press.setFillColor(sf::Color::White);
+        press.setPosition(400, 450);
         if (sound[5].getStatus()!= sf::Music::Status::Playing&&countover!=1) {
             sound[5].play();
             countover=1;
-        }
+        }       
+        window.draw(press);
         window.draw(gameover);
     }
        

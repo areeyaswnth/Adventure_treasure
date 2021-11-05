@@ -113,7 +113,6 @@ void Menugame::Draw(sf::RenderWindow& window)
 		backgrounds.Draw(window);	
 		game.gamedraw(window, deltaTime);
 		if (game.over()) {
-		cout << scoreboard.scoreplayer << " " << scoreboard.Pname;
 		scoreboard.wFile();
 			game.reset();
 			game_state = false;

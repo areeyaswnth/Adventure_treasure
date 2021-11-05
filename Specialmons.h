@@ -7,6 +7,7 @@ public:
 	Specialmons();
 	~Specialmons();
 	void update();
+	void set();
 	void Draw(sf::RenderWindow& window);
 	sf::RectangleShape body;
 	int HP;
@@ -17,7 +18,7 @@ public:
 private:
 	sf::Texture texture;
 	float speed;
-	int randtype;
+	int randdir;
 	float pos_x;
 	float pos_y;
 	int dirx, diry;

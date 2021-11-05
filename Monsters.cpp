@@ -30,18 +30,15 @@ void Monsters::update()
 	if (dirx == 1) body.move(speed, 0);
 	else if(dirx==2)  body.move(-speed, 0);
 	}
-
 	if (body.getPosition().x > (pos_x + step)) dirx = +2;
 	else if (body.getPosition().x <( pos_x - step)) dirx = +1;
-	if(body.getPosition().x > 1080)	dirx = +2;
+	if(body.getPosition().x > 1040)	dirx = +2;
 	if (body.getPosition().x < 0) dirx = +1;
-
-
 
 	if ((level >=3&&(randtype==2))||(level>=8&&(randtype==3))) {
 	if (diry == 1) body.move(0, speed);
 	else if (diry == 2)  body.move(0, -speed);
-	if (body.getPosition().y > (pos_y + step) || body.getPosition().y > 720) {
+	if (body.getPosition().y > (pos_y + step) || body.getPosition().y > 700) {
 		diry = +2;
 	}
 	else if (body.getPosition().y < (pos_y - step) || body.getPosition().y < 0) {
@@ -68,7 +65,7 @@ void Monsters::Draw(sf::RenderWindow& window)
 	
 	if (HP > 0) {
 		state = true;	
-	window.draw(body);
+		window.draw(body);
 	}
 	else
 	{

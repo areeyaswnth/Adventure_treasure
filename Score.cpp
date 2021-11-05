@@ -52,10 +52,7 @@ void Score::wFile()
 		strcpy(temp, userScore[i].second.c_str());		
 		fprintf(fp, "%s %d\n", temp, userScore[i].first);
 	}
-	for ( int i = 5; i >0;  i--)
-	{
-		cout <<userScore[i].second<<" "<< userScore[i].first<<endl;	
-	}
+
 	for (int i = 0; i < 6; i++)
 	{
 		userScore.pop_back();
