@@ -96,7 +96,8 @@ void Menugame::Draw(sf::RenderWindow& window)
 	
 	if (menu_state&&!highscore_state&&!game_state&&!howto_state) {
 	update(window);
-	backgrounds.Draw(window);
+	//backgrounds.Dra
+	backgrounds.menubg(window);
 	window.draw(ary);
 	window.draw(Howto);
 	window.draw(Highscore);
