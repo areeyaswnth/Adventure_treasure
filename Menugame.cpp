@@ -122,7 +122,7 @@ void Menugame::Draw(sf::RenderWindow& window)
 		}
 	}
 	if (howto_state && !menu_state) {
-		backgrounds.Draw(window);
+		backgrounds.howtobg(window);
 		howto.Draw(window);
 		if (howto.Exit(window)) {
 			clicksound.play();
@@ -133,7 +133,7 @@ void Menugame::Draw(sf::RenderWindow& window)
 
 	}
 	if (highscore_state && !menu_state) {
-		backgrounds.Draw(window);		
+		backgrounds.scorebg(window);		
 		scoreboard.Drawscore(window);
 		window.draw(howto.exit);
 		if (howto.Exit(window)) {

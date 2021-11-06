@@ -11,7 +11,18 @@ Background::Background()
 	bgmenu.setSize(size);
 	bgmenu.setPosition(0.0f, 0.0f);
 	bgmenu.setTexture(&menutt);
-}
+
+	score.loadFromFile("graphics/score.png");
+	bgscore.setSize(size);
+	bgscore.setPosition(0.0f, 0.0f);
+	bgscore.setTexture(&score);
+
+
+	howto.loadFromFile("graphics/howto.png");
+	bghowto.setSize(size);
+	bghowto.setPosition(0.0f, 0.0f);
+	bghowto.setTexture(&howto);
+	}
 
 Background::~Background()
 {
@@ -26,4 +37,14 @@ void Background::menubg(sf::RenderWindow& window)
 {
 
 	window.draw(bgmenu);
+}
+
+void Background::scorebg(sf::RenderWindow& window)
+{
+	window.draw(bgscore);
+}
+
+void Background::howtobg(sf::RenderWindow& window)
+{
+	window.draw(bghowto);
 }
