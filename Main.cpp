@@ -75,7 +75,7 @@ int main()
 
         }
         if (namestate) {
-            bg.Draw(window);
+            bg.menubg(window);
             draw_username();
         }
         if (!namestate) {
