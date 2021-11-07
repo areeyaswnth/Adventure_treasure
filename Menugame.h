@@ -7,7 +7,6 @@
 #include"Howtoplay.h"
 #include"Score.h"
 #include<string.h>
-#include"Gui.h"
 #include<vector>
 #include <windows.h>
 class Menugame
