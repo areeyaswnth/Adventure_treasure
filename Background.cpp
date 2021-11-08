@@ -46,5 +46,6 @@ void Background::scorebg(sf::RenderWindow& window)
 
 void Background::howtobg(sf::RenderWindow& window)
 {
-	window.draw(bghowto);
+	
+	//window.draw(bghowto);
 }
