@@ -36,7 +36,7 @@ void Background::Draw(sf::RenderWindow& window)
 void Background::menubg(sf::RenderWindow& window)
 {
 
-	window.draw(bgmenu);
+	window.draw(bghowto);
 }
 
 void Background::scorebg(sf::RenderWindow& window)

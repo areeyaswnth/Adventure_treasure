@@ -16,7 +16,7 @@ Specialmons::Specialmons()
 	pos_x = body.getPosition().x;
 	pos_y = body.getPosition().y;
 	randdir = randrangspe(1,8);
-	speed = 0.03f;
+	speed = 0.05f;
 }
 
 Specialmons::~Specialmons()
@@ -52,7 +52,7 @@ void Specialmons::set()
 	body.setPosition(randrangspe(55, 1025), randrangspe(200, 680));
 	pos_x = body.getPosition().x;
 	pos_y = body.getPosition().y;
-	randdir = randrangspe(1, 8);
+	randdir = randrangspe(1, 6);
 }
 
 void Specialmons::Draw(sf::RenderWindow& window)

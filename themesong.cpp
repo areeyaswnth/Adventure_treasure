@@ -2,7 +2,7 @@
 
 themesong::themesong()
 {
-	buffer.loadFromFile("sound/demo.wav");
+//	buffer.loadFromFile("sound/demo.wav");
 	sound.setBuffer(buffer);
 	sound.setVolume(1);
 }

@@ -51,7 +51,7 @@ void Monsters::update()
 void Monsters::set()
 {
 	
-	speed = randrangemonster(3, 7) * 0.01;
+	speed = randrangemonster(5, 7) * 0.01;
 	step = randrangemonster(300, 500);
 	dirx = randrangemonster(1, 2);
 	diry = randrangemonster(1, 2);
