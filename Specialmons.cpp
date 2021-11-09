@@ -29,13 +29,13 @@ void Specialmons::update()
 	if (body.getPosition().x <= 0 || body.getPosition().x >= 1040 || body.getPosition().y <= 100|| body.getPosition().y >=700) {
 		pos_x = body.getPosition().x;
 		pos_y = body.getPosition().y;
-		randdir = randrangspe(1, 6);
+		randdir = randrangspe(1, 8);
 	}
 	 if(body.getPosition().y-pos_y>100|| body.getPosition().y-pos_y<-100|| body.getPosition().x-pos_x>100||body.getPosition().x-pos_x<-100)
 	{
 		pos_x = body.getPosition().x;
 		pos_y = body.getPosition().y;
-		randdir = randrangspe(1, 6);
+		randdir = randrangspe(1, 8);
 	}
 	if (randdir == 1)body.move(speed, 0);
 	else if (randdir == 2)body.move(-speed, 0);
@@ -52,7 +52,7 @@ void Specialmons::set()
 	body.setPosition(randrangspe(55, 1025), randrangspe(200, 680));
 	pos_x = body.getPosition().x;
 	pos_y = body.getPosition().y;
-	randdir = randrangspe(1, 6);
+	randdir = randrangspe(1, 8);
 }
 
 void Specialmons::Draw(sf::RenderWindow& window)
