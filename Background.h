@@ -3,6 +3,7 @@
 #include<SFML/Graphics.hpp>
 class Background{
 public:
+	int level;
 	Background();
 	~Background();
 	void Draw(sf::RenderWindow& window);
@@ -12,6 +13,6 @@ public:
 private:
 	sf::RectangleShape bg;
 	sf::Vector2f size = { 1080.0f,720.0f };
-	sf::Texture bg_texture,menutt,score,howto;
+	sf::Texture bg_texture[3],menutt,score,howto;
 	sf::RectangleShape bgmenu,bgscore,bghowto;
 };

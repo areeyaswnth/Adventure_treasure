@@ -22,10 +22,11 @@ public:
 	bool over();
 	void reset();	
 	std::string username;
-	int scorep;
+	int scorep;	
+	int level;	
 private:	
 	int spe;
-	int level;	
+
 	int chest_count;
 	sf::Event event;
 	sf::SoundBuffer buffer[7];

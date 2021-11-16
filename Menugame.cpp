@@ -110,6 +110,7 @@ void Menugame::Draw(sf::RenderWindow& window)
 		if (deltaTime >20) {
 			clock[0].restart();
 		}			
+		backgrounds.level = game.level;
 		scoreboard.scoreplayer=game.scorep  ;
 		backgrounds.Draw(window);	
 		game.gamedraw(window, deltaTime);

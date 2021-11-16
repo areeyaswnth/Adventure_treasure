@@ -2,10 +2,12 @@
 
 Background::Background()
 {
-	bg_texture.loadFromFile("graphics/background.png");
+	bg_texture[0].loadFromFile("graphics/background1.png");
+	bg_texture[1].loadFromFile("graphics/background2.png");
+	bg_texture[2].loadFromFile("graphics/background3.png");
 	bg.setSize(size);
 	bg.setPosition(0.0f, 0.0f);
-	bg.setTexture(&bg_texture);	
+	bg.setTexture(&bg_texture[0]);	
 
 	menutt.loadFromFile("graphics/bg.png");
 	bgmenu.setSize(size);
@@ -30,6 +32,8 @@ Background::~Background()
 
 void Background::Draw(sf::RenderWindow& window)
 {
+	if(level>3)	bg.setTexture(&bg_texture[1]);
+	if (level > 6)	bg.setTexture(&bg_texture[2]);
 	window.draw(bg);
 }
 
