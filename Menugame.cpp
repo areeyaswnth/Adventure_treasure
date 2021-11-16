@@ -117,6 +117,7 @@ void Menugame::Draw(sf::RenderWindow& window)
 		if (game.over()) {
 		scoreboard.wFile();
 			game.reset();
+			backgrounds.level = 0;
 			game_state = false;
 			namestate = false;
 			menu_state = true;

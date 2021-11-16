@@ -13,6 +13,7 @@ public:
 private:
 	sf::RectangleShape bg;
 	sf::Vector2f size = { 1080.0f,720.0f };
-	sf::Texture bg_texture[3],menutt,score,howto;
+	sf::Texture bg_texture[3],menutt,score,howto,startt;
 	sf::RectangleShape bgmenu,bgscore,bghowto;
+	
 };

@@ -41,7 +41,7 @@ void Monsters::update()
 	if (body.getPosition().y > (pos_y + step) || body.getPosition().y > 700) {
 		diry = +2;
 	}
-	else if (body.getPosition().y < (pos_y - step) || body.getPosition().y < 0) {
+	else if (body.getPosition().y < (pos_y - step) || body.getPosition().y < 150) {
 		diry = +1;
 	}
 	}

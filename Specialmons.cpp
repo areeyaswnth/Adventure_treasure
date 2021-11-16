@@ -26,12 +26,12 @@ Specialmons::~Specialmons()
 void Specialmons::update()
 {
 
-	if (body.getPosition().x <= 0 || body.getPosition().x >= 1040 || body.getPosition().y <= 100|| body.getPosition().y >=700) {
+	if (body.getPosition().x < 0 || body.getPosition().x > 1040 || body.getPosition().y < 150|| body.getPosition().y >700) {
 		pos_x = body.getPosition().x;
 		pos_y = body.getPosition().y;
 		randdir = randrangspe(1, 8);
 	}
-	 if(body.getPosition().y-pos_y>100|| body.getPosition().y-pos_y<-100|| body.getPosition().x-pos_x>100||body.getPosition().x-pos_x<-100)
+	 else if(body.getPosition().y-pos_y>100|| body.getPosition().y-pos_y<-100|| body.getPosition().x-pos_x>100||body.getPosition().x-pos_x<-100)
 	{
 		pos_x = body.getPosition().x;
 		pos_y = body.getPosition().y;

@@ -151,7 +151,6 @@ void Howtoplay::Draw(sf::RenderWindow& window)
 {	
 	window.draw(chest.body);
 	window.draw(chest.text[0]);
-	window.draw(player.body);
 	window.draw(keytext);
 	window.draw(item[0].body);
 	window.draw(item[0].text[0]);

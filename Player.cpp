@@ -37,7 +37,7 @@ void Player::Update(float deltatime)
 		body.setTextureRect(sf::IntRect(body_xsize * animationFrame, body_ysize * 1, body_xsize, body_ysize));
 		dir_bullet = 2;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && deltatime > 20&& body.getPosition().y>0 ) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && deltatime > 20&& body.getPosition().y>87 ) {
 		body.move(0.f, -4.0f);
 		body.setTextureRect(sf::IntRect(body_xsize * animationFrame, body_ysize * 3, body_xsize, body_ysize));
 		dir_bullet = 3;
