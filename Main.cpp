@@ -16,13 +16,17 @@ void draw_username();
 using namespace sf;    
 using namespace std;
 vector<char> username;    
-string user_name = "";    
+string player_name = "";    
 Background bg;
 RenderWindow window(sf::VideoMode(1080, 720), "Game");
-    Menugame menu;  
+Menugame menu;  
+Texture nameboardtexture;
+Sprite nameboard;
 int main()
 {
-
+    nameboardtexture.loadFromFile("graphics/name.png");
+    nameboard.setTexture(nameboardtexture);
+    nameboard.setScale(5,5);
     bool namestate =false;
     srand((int)time(0));
     themesong song;
@@ -52,7 +56,7 @@ int main()
             {
                 username.pop_back();
             }
-            if (!username.empty() && !((username.back() >= 'a' && username.back() <= 'z') || (username.back() >= 'A' && username.back() <= 'Z') || (username.back() >= '0' && username.back() <= '9') || username.back() == '_'))
+            if (!username.empty() && !((username.back() >= 'A' && username.back() <= 'Z') || (username.back() >= 'a' && username.back() <= 'z') || (username.back() >= '0' && username.back() <= '9') || username.back() == '_'))
             {
                 username.pop_back();
             }
@@ -62,7 +66,7 @@ int main()
             }            
             if (Keyboard::isKeyPressed(Keyboard::Enter)&& username.size()!=0) {
                 menu.clicksound.play();
-                menu.getname(user_name);
+                menu.getname(player_name);
                 menu.namestate = true;
                 menu.game_state = true;
                 namestate = false;
@@ -92,27 +96,29 @@ int main()
 
 void draw_username()
 {
-    user_name = "";
-    sf::Text US_name;
+    player_name = "";
+    sf::Text p_name;
     sf::Font font;
     font.loadFromFile("font/8Bit.ttf");
-    US_name.setFont(font);
+    p_name.setFont(font);
     for (int i = 0; i < username.size(); i++)
     {
-        user_name += username[i];
+        player_name += username[i];
     }
-    US_name.setCharacterSize(55);
+    p_name.setCharacterSize(55);
     if (username.empty())
     {
-        US_name.setFillColor(sf::Color(255, 255, 255, 100));
-        US_name.setString("ENTER YOUR NAME");
+        p_name.setFillColor(sf::Color(255, 255, 255, 100));
+        p_name.setString("ENTER YOUR NAME");
     }
     else
     {
         //menu.clicksound.play();
-        US_name.setString(user_name);
-        US_name.setFillColor(sf::Color::White);
+        p_name.setString(player_name);
+        p_name.setFillColor(sf::Color::White);
     }
-    US_name.setPosition(540-(US_name.getGlobalBounds().width/2), 330);
-    window.draw(US_name);
+    p_name.setPosition(540-(p_name.getGlobalBounds().width/2), 330);
+    nameboard.setPosition(540 - (nameboard.getGlobalBounds().width / 2), 260);
+    window.draw(nameboard);
+    window.draw(p_name);
 }

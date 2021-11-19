@@ -451,7 +451,7 @@ void Game::gamedraw(sf::RenderWindow& window,float time)
     {
         scorep = player.score;
         over();
-        sf::Text press("PRESS R FOR BACK TO MENU", font, 30);
+        sf::Text press("PRESS R FOR BACK TO MENU\n      and save yourscore", font, 30);
         press.setFillColor(sf::Color::White);
         press.setPosition(400, 450);
         if (sound[5].getStatus()!= sf::Music::Status::Playing&&countover!=1) {
