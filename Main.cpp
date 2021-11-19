@@ -102,11 +102,8 @@ void draw_username()
     Font font;
     font.loadFromFile("font/8Bit.ttf");    
     Text enter("Player name",font,80);
-    Text entername("pls enter your name", font, 50);
     enter.setFillColor(sf::Color(255, 255, 255, 100));
     enter.setPosition(340, 150);
-    entername.setFillColor(sf::Color(255, 255, 255, 100));
-    entername.setPosition(340, 330);
     p_name.setFont(font);
     for (int i = 0; i < username.size(); i++)
     {
@@ -130,6 +127,5 @@ void draw_username()
     window.draw(nameboard);
     window.draw(p_name);
     window.draw(enter);
-    if (username.empty())window.draw(entername);
 
 }

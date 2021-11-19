@@ -1,5 +1,5 @@
+testgame 9860
 mm 8140
 mm 7560
+MISSTEST 6720
 mm 4380
-mm 1200
-miss 200
